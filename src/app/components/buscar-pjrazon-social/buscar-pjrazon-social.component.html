@@ -1,0 +1,31 @@
+<div class="ui grid">
+  <div class="row one column">
+    <div class="column">
+      <!--formulario de busqueda-->
+      <div class="ui search ">
+        <div class="ui icon input fluid">
+          <input class="prompt" type="text" placeholder="Razón Social" (keyup.enter)="buscar(rs.value)" #rs>
+          <i class="search icon"></i>
+        </div>
+        <div class="results"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="one column row">
+    <div class="column">
+
+      <!--mostrar resultado-->
+      <div class="ui divided selection list">
+        <a class="item" *ngFor="let element of data | keys">
+          <div class="ui  horizontal label">{{element.key}}</div>
+          {{element.value}}
+        </a>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+

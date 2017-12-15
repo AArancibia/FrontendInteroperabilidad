@@ -4,8 +4,9 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --port 5000",
     "build": "ng build",
+    "build-on-tdie": "ng build --env=prod --output-path=C:/Users/XEI/Documents/IdeasProjects/tdie/src/main/resources/static/interoperabilidad",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -22,6 +23,8 @@
     "@angular/platform-browser-dynamic": "^4.0.0",
     "@angular/router": "^4.0.0",
     "core-js": "^2.4.1",
+    "jquery": "^3.2.1",
+    "ngx-soap": "^0.2.2-beta4",
     "rxjs": "^5.1.0",
     "zone.js": "^0.8.4"
   },

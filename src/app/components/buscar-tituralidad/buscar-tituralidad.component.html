@@ -1,0 +1,58 @@
+<div class="ui grid">
+  <div class="row one column">
+    <div class="column">
+      <!--formulario de busqueda-->
+      <form class="ui form" (ngSubmit)="buscarTitularidad()">
+        <div class="field">
+          <label>Tipo de Participante</label>
+          <select name="tipoParticipante" class="ui fluid dropdown" (change)="cambiarPersona(tipoPersona.value)" [(ngModel)]="titular.tipoParticipante" #tipoPersona appDropdown>
+            <option value="">Tipo de Participante</option>
+            <option value="N" >Persona Natural</option>
+            <option value="J">Persona Jurídica</option>
+          </select>
+          <!--<input type="text" name="tipoParticipante" placeholder="Tipo de Participante" [(ngModel)]="titular.tipoParticipante" >-->
+        </div>
+        <div class="field" *ngIf="isNatural">
+          <label>Apellido Paterno</label>
+          <input type="text" name="apellidoPaterno" placeholder="Apellido Paterno" [(ngModel)]="titular.apellidoPaterno">
+        </div>
+        <div class="field" *ngIf="isNatural">
+          <label>Apallido Materno</label>
+          <input type="text" name="apellidoMaterno" placeholder="Apallido Materno" [(ngModel)]="titular.apellidoMaterno">
+        </div>
+        <div class="field" *ngIf="isNatural">
+          <label>Nombres</label>
+          <input type="text" name="Nombres" placeholder="Nombres" [(ngModel)]="titular.Nombres">
+        </div>
+        <div class="field" *ngIf="!isNatural">
+          <label>Razon Social</label>
+          <input type="text" name="razonSocial" placeholder="Razon Social" [(ngModel)]="titular.razonSocial">
+        </div>
+
+        <button class="ui button" type="submit">Buscar</button>
+      </form>
+
+
+    </div>
+  </div>
+
+  <div class="one column row">
+    <div class="column">
+      <h1 class="ui header">Resultado</h1>
+      <!--mostrar resultado-->
+      <div *ngFor="let titu of datos;index as i" class="ui divided selection list">
+        <a class="item" >
+          <div class="ui blue horizontal label"># RESULTADO</div>
+          {{i+1}}
+        </a>
+        <a class="item" *ngFor="let elementos of titu | keys">
+          <div class="ui  horizontal label">{{elementos.key}}</div>
+          {{elementos.value}}
+        </a>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
