@@ -1,5 +1,9 @@
 <div class="ui grid">
   <div class="row one column">
+
+      <div class="column">
+        <h1 class="header">LISTA DE ASIENTOS</h1>
+      </div>
     <div class="column">
       <!--formulario de busqueda-->
       <form class="ui form" (ngSubmit)="buscarAsiento()">
@@ -33,36 +37,41 @@
       <!--mostrar resultado-->
       <div class="ui divided selection list">
         <a class="item">
-          <div class="ui  horizontal label">Rigistro</div>
-          Kumquats
+          <div class="ui  horizontal label">Transaccion</div>
+          {{datos?.nroTotalPag}}
         </a>
         <a class="item">
-          <div class="ui  horizontal label">Libro</div>
-          Ice Cream
+          <div class="ui  horizontal label">Numero de Páginas</div>
+          {{datos?.transaccion}}
         </a>
-        <a class="item">
-          <div class="ui  horizontal label">Partida</div>
-          Orange
+      </div>
+      <h3 class="ui header">Fichas</h3>
+      <div  class="ui divided selection list">
+        <a class="item" *ngFor="let fichas of datos.listFichas|keys">
+          <div class="ui  horizontal label">{{fichas.key}}</div>
+          <ng-container *ngIf="fichas.key!='listPag'">{{fichas.value}}</ng-container>
+          <ng-container *ngIf="fichas.key=='listPag'">
+            <div   class="ui divided selection list" *ngFor="let pagina of fichas.value">
+                <a *ngFor="let elem of pagina|keys" class="item">
+                  <div class="ui  horizontal label">{{elem.key}}</div>
+                  {{elem.value}}
+                </a>
+            </div>
+          </ng-container>
         </a>
-        <a class="item">
-          <div class="ui horizontal label">Ficha</div>
-          Poodle
+      </div>
+      <h3 class="ui header">Folios</h3>
+      <div *ngFor="let folios of datos.listFolios" class="ui divided selection list">
+        <a class="item" *ngFor="let fol of folios|keys">
+          <div class="ui  horizontal label">{{fol.key}}</div>
+          {{fol.value}}
         </a>
-        <a class="item">
-          <div class="ui horizontal label">Tomo</div>
-          Poodle
-        </a>
-        <a class="item">
-          <div class="ui horizontal label">Folio</div>
-          Poodle
-        </a>
-        <a class="item">
-          <div class="ui horizontal label">Tipo</div>
-          Poodle
-        </a>
-        <a class="item">
-          <div class="ui horizontal label">Denominacion</div>
-          Poodle
+      </div>
+      <h3 class="ui header">Asientos</h3>
+      <div *ngFor="let asientos of datos.listAsientos" class="ui divided selection list">
+        <a class="item" *ngFor="let asien of asientos|keys">
+          <div class="ui  horizontal label">{{asien.key}}</div>
+          {{asien.value}}
         </a>
       </div>
     </div>

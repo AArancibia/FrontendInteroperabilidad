@@ -17,6 +17,7 @@ import {FormsModule} from "@angular/forms";
 import {BuscarTitularidadService} from "./services/buscar-titularidad.service";
 import { DropdownDirective } from './directives/dropdown.directive';
 import {PideService} from "./services/pide.service";
+import {ComunicatorService} from "./services/comunicator.service";
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import {PideService} from "./services/pide.service";
   providers: [
     PideService,
     BuscarTitularidadService,
-    BuscarNaveAeronaveService
+    BuscarNaveAeronaveService,
+    ComunicatorService
   ],
   bootstrap: [AppComponent]
 })
