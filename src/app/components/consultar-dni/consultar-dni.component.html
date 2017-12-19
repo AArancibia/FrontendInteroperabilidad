@@ -1,0 +1,50 @@
+<div class="ui grid">
+  <div class="row one column">
+    <div class="column">
+      <!--formulario de busqueda-->
+      <form class="ui form" (ngSubmit)="consultar()">
+
+        <div class="field" >
+          <label>Apellido Paterno</label>
+          <input type="text" name="nuDniConsulta" placeholder="DNI a consultar" [(ngModel)]="usuario.nuDniConsulta">
+        </div>
+        <div class="field" >
+          <label>Apallido Materno</label>
+          <input type="text" name="nuDniUsuario" placeholder="DNI usuario" [(ngModel)]="usuario.nuDniUsuario">
+        </div>
+        <div class="field" >
+          <label>Nombres</label>
+          <input type="text" name="nuDniUsuario" placeholder="RUC entidad" [(ngModel)]="usuario.nuDniUsuario">
+        </div>
+        <div class="field" >
+          <label>Razon Social</label>
+          <input type="text" name="password" placeholder="Clave usuario" [(ngModel)]="usuario.password">
+        </div>
+
+        <button class="ui button" type="submit">Buscar</button>
+      </form>
+
+
+    </div>
+  </div>
+
+  <div class="one column row">
+    <div class="column">
+      <h1 class="ui header">Resultado</h1>
+      <!--mostrar resultado-->
+      <div *ngFor="let titu of datos;index as i" class="ui divided selection list">
+        <a class="item" >
+          <div class="ui blue horizontal label"># RESULTADO</div>
+          {{i+1}}
+        </a>
+        <a class="item" *ngFor="let elementos of titu | keys">
+          <div class="ui  horizontal label">{{elementos.key}}</div>
+          {{elementos.value}}
+        </a>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
