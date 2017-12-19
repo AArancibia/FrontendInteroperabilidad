@@ -18,6 +18,8 @@ import {BuscarTitularidadService} from "./services/buscar-titularidad.service";
 import { DropdownDirective } from './directives/dropdown.directive';
 import {PideService} from "./services/pide.service";
 import {ComunicatorService} from "./services/comunicator.service";
+import { ConsultarDniComponent } from './components/consultar-dni/consultar-dni.component';
+import { ActualizarCredencialComponent } from './components/actualizar-credencial/actualizar-credencial.component';
 
 
 @NgModule({
@@ -31,7 +33,9 @@ import {ComunicatorService} from "./services/comunicator.service";
     VerAsientoComponent,
     VerDetalleRpvComponent,
     KeysPipe,
-    DropdownDirective
+    DropdownDirective,
+    ConsultarDniComponent,
+    ActualizarCredencialComponent
   ],
   imports: [
     FormsModule,

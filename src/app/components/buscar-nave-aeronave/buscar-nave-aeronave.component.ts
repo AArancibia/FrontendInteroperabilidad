@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {BuscarNaveAeronaveService} from "../../services/buscar-nave-aeronave.service";
+import {PideService} from "../../services/pide.service";
 
 @Component({
   selector: 'app-buscar-nave-aeronave',
@@ -9,15 +10,19 @@ import {BuscarNaveAeronaveService} from "../../services/buscar-nave-aeronave.ser
 export class BuscarNaveAeronaveComponent implements OnInit {
   datos:any;
 
-  constructor(private buscarNave: BuscarNaveAeronaveService){
+  constructor(private pide:PideService){
 
   }
  getNaveAeronave(matricula){
-   this.buscarNave.getNave(matricula).then(res=>{
-      this.datos=res;
-   });
+    this.pide.getAeronave(matricula).then(res=>{
+      this.datos= res;
+    })
+   // this.buscarNave.getNave(matricula).then(res=>{
+   //    this.datos=res;
+   // });
  }
   ngOnInit() {
+
   }
 
 }

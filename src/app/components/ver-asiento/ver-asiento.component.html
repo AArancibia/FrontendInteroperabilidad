@@ -2,30 +2,30 @@
   <div class="row one column">
     <div class="column">
       <!--formulario de busqueda-->
-      <form class="ui form">
+      <form class="ui form" (ngSubmit)="verAsiento()">
         <div class="field">
           <label>Transaccion</label>
-          <input type="text" name="first-name" placeholder="Transaccion">
+          <input type="text" name="transaccion" placeholder="Transaccion" [(ngModel)]="vistaAsiento.transaccion">
         </div>
         <div class="field">
           <label>Imagen</label>
-          <input type="text" name="last-name" placeholder="Imagen">
+          <input type="text" name="idImg" placeholder="Imagen" [(ngModel)]="vistaAsiento.idImg">
         </div>
         <div class="field">
           <label>Tipo</label>
-          <input type="text" name="last-name" placeholder="Tipo">
+          <input type="text" name="tipo" placeholder="Tipo" [(ngModel)]="vistaAsiento.tipo">
         </div>
         <div class="field">
           <label>Numero Total de Paginas</label>
-          <input type="text" name="last-name" placeholder="Numero Total de Paginas">
+          <input type="text" name="nroTotalPag" placeholder="Numero Total de Paginas" [(ngModel)]="vistaAsiento.nroTotalPag">
         </div>
         <div class="field">
           <label>Numero Pagina de Referencia</label>
-          <input type="text" name="last-name" placeholder="Numero Pagina de Referencia">
+          <input type="text" name="nroPagRef" placeholder="Numero Pagina de Referencia" [(ngModel)]="vistaAsiento.nroPagRef">
         </div>
         <div class="field">
           <label>Pagina</label>
-          <input type="text" name="last-name" placeholder="Pagina">
+          <input type="text" name="pagina" placeholder="Pagina" [(ngModel)]="vistaAsiento.pagina">
         </div>
 
         <button class="ui button" type="submit">Buscar</button>
@@ -39,40 +39,8 @@
     <div class="column">
       <h1 class="ui header">Resultado</h1>
       <!--mostrar resultado-->
-      <div class="ui divided selection list">
-        <a class="item">
-          <div class="ui  horizontal label">Rigistro</div>
-          Kumquats
-        </a>
-        <a class="item">
-          <div class="ui  horizontal label">Libro</div>
-          Ice Cream
-        </a>
-        <a class="item">
-          <div class="ui  horizontal label">Partida</div>
-          Orange
-        </a>
-        <a class="item">
-          <div class="ui horizontal label">Ficha</div>
-          Poodle
-        </a>
-        <a class="item">
-          <div class="ui horizontal label">Tomo</div>
-          Poodle
-        </a>
-        <a class="item">
-          <div class="ui horizontal label">Folio</div>
-          Poodle
-        </a>
-        <a class="item">
-          <div class="ui horizontal label">Tipo</div>
-          Poodle
-        </a>
-        <a class="item">
-          <div class="ui horizontal label">Denominacion</div>
-          Poodle
-        </a>
-      </div>
+
+      <img *ngIf="this.datos" src="data:image/jpg;base64,{{this.datos?.img}}" alt="">
     </div>
 
   </div>

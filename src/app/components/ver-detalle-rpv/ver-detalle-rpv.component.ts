@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {DetalleAsiento} from "../../entities/detalle-asiento";
+import {PideService} from "../../services/pide.service";
+import {ComunicatorService} from "../../services/comunicator.service";
 
 @Component({
   selector: 'app-ver-detalle-rpv',
@@ -6,10 +9,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./ver-detalle-rpv.component.less']
 })
 export class VerDetalleRpvComponent implements OnInit {
-
-  constructor() { }
+  detalleAsiento:DetalleAsiento;
+  datos:any;
+  constructor(private pide:PideService, private logger:ComunicatorService) {
+    this.detalleAsiento = new DetalleAsiento();
+  }
 
   ngOnInit() {
   }
 
+  verDetalleAsiento(){
+    this.pide.getData(this.detalleAsiento,"verDetalleRPV").then(res=>{
+      this.datos=res.Body.verDetalleRPVResponse.vehiculo;
+    },err=>{
+      this.logger.addLogMessage(err);
+    })
+  }
 }

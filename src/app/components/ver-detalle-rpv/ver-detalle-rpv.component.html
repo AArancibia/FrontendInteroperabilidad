@@ -2,18 +2,18 @@
   <div class="row one column">
     <div class="column">
       <!--formulario de busqueda-->
-      <form class="ui form">
+      <form class="ui form" (ngSubmit)="verDetalleAsiento()">
         <div class="field">
           <label>Zona</label>
-          <input type="text" name="first-name" placeholder="Zona">
+          <input type="text" name="zona" placeholder="Zona"  [(ngModel)]="detalleAsiento.zona">
         </div>
         <div class="field">
           <label>Oficina</label>
-          <input type="text" name="last-name" placeholder="Oficina">
+          <input type="text" name="oficina" placeholder="Oficina" [(ngModel)]="detalleAsiento.oficina">
         </div>
         <div class="field">
           <label>Placa</label>
-          <input type="text" name="last-name" placeholder="Placa">
+          <input type="text" name="placa" placeholder="Placa" [(ngModel)]="detalleAsiento.placa">
         </div>
 
 
@@ -29,38 +29,11 @@
       <h1 class="ui header">Resultado</h1>
       <!--mostrar resultado-->
       <div class="ui divided selection list">
-        <a class="item">
-          <div class="ui  horizontal label">Rigistro</div>
-          Kumquats
+        <a *ngFor="let vh of datos|keys" class="item">
+          <div class="ui  horizontal label">{{vh.key}}</div>
+          {{vh.value}}
         </a>
-        <a class="item">
-          <div class="ui  horizontal label">Libro</div>
-          Ice Cream
-        </a>
-        <a class="item">
-          <div class="ui  horizontal label">Partida</div>
-          Orange
-        </a>
-        <a class="item">
-          <div class="ui horizontal label">Ficha</div>
-          Poodle
-        </a>
-        <a class="item">
-          <div class="ui horizontal label">Tomo</div>
-          Poodle
-        </a>
-        <a class="item">
-          <div class="ui horizontal label">Folio</div>
-          Poodle
-        </a>
-        <a class="item">
-          <div class="ui horizontal label">Tipo</div>
-          Poodle
-        </a>
-        <a class="item">
-          <div class="ui horizontal label">Denominacion</div>
-          Poodle
-        </a>
+
       </div>
     </div>
 

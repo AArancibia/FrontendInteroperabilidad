@@ -3,6 +3,7 @@
   <div class="row">
     <div class="six wide column">
       <div class="ui secondary vertical menu">
+        <div class="header item">SUNARP</div>
 
         <a routerLink="/buscarNaveAeronave" class=" active item">
           	buscarNaveAeronave
@@ -31,7 +32,13 @@
         <a routerLink="/verDetalleRpv" class="item">
           	verDetalleRPV
         </a>
-
+        <div class="header item">RENIEC</div>
+        <a routerLink="/" class="item">
+          actualizarcredencial
+        </a>
+        <a routerLink="/" class="item">
+          consultar
+        </a>
       </div>
       <div *ngFor="let el of log; index as i" class="ui vertical inverted segment" [class.red]="el.tipo=='error'" [class.green]="el.tipo=='success'">
         {{el.message}}

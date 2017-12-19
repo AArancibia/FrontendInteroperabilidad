@@ -4,7 +4,7 @@ import {Http} from "@angular/http";
 
 @Injectable()
 export class PideService {
-
+  baseUrl =  'http://192.168.10.6:5050/platpide';
 
 
 
@@ -57,6 +57,14 @@ export class PideService {
 
 
 
+  }
+
+
+  getAeronave(matricula:string):Promise<any>{
+    const url = this.baseUrl+'/aeronave/'+matricula;
+    return this.http.post(url,{})
+      .toPromise()
+      .then(response => response).catch(this.handleError);
   }
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
