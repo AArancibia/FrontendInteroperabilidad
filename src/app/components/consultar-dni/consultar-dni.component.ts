@@ -14,5 +14,7 @@ usuario:Usuario;
 
   ngOnInit() {
   }
+consultar(){
 
+}
 }

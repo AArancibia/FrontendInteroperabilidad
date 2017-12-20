@@ -10,6 +10,8 @@ import {ListarAsientosComponent} from "./components/listar-asientos/listar-asien
 import {ObtenerOficinasComponent} from "./components/obtener-oficinas/obtener-oficinas.component";
 import {VerAsientoComponent} from "./components/ver-asiento/ver-asiento.component";
 import {VerDetalleRpvComponent} from "./components/ver-detalle-rpv/ver-detalle-rpv.component";
+import {ConsultarDniComponent} from "./components/consultar-dni/consultar-dni.component";
+import {ActualizarCredencialComponent} from "./components/actualizar-credencial/actualizar-credencial.component";
 
 
 const routes: Routes = [
@@ -20,6 +22,8 @@ const routes: Routes = [
   {path: 'obtenerOficinas', component: ObtenerOficinasComponent},
   {path: 'verAsiento', component: VerAsientoComponent},
   {path: 'verDetalleRpv', component: VerDetalleRpvComponent},
+  {path: 'consultar', component: ConsultarDniComponent},
+  {path: 'actualizarCredencial', component: ActualizarCredencialComponent},
   // {path: '', redirectTo: '/login', pathMatch: 'full'},
   {path: '', redirectTo: '/buscarNaveAeronave', pathMatch: 'full'},
   {path: '**', redirectTo: '/buscarNaveAeronave', pathMatch: 'full'}

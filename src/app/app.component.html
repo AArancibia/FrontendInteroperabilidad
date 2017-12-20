@@ -2,44 +2,45 @@
   <div class="one column row"></div>
   <div class="row">
     <div class="six wide column">
-      <div class="ui secondary vertical menu">
-        <div class="header item">SUNARP</div>
 
-        <a routerLink="/buscarNaveAeronave" class=" active item">
+      <div class="ui secondary vertical menu">
+        <div class="header item">SUNARP </div>
+
+        <a routerLink="/buscarNaveAeronave" class=" active item" [class.active]="operacionActual=='/buscarNaveAeronave'">
           	buscarNaveAeronave
 
         </a>
-        <a routerLink="/buscarPjrazonSocial" class="item">
+        <a routerLink="/buscarPjrazonSocial" class="item" [class.active]="operacionActual=='/buscarPjrazonSocial'">
           buscarPJRazonSocial
-
         </a>
-        <a routerLink="/buscarTitularidad" class="item">
+        <a routerLink="/buscarTitularidad" class="item" [class.active]="operacionActual=='/buscarTitularidad'">
           	buscarTitularidad
 
         </a>
-        <a routerLink="/obtenerOficinas" class="item">
+        <a routerLink="/obtenerOficinas" class="item" [class.active]="operacionActual=='/obtenerOficinas'">
           	getOficinas
         </a>
-        <a routerLink="/listarAsientos" class="item">
+        <a routerLink="/listarAsientos"   class="item" [class.active]="operacionActual=='/listarAsientos'">
 
           	listarAsientos
 
         </a>
-        <a routerLink="/verAsiento" class="item">
+        <a routerLink="/verAsiento" class="item" [class.active]="operacionActual=='/verAsiento'">
           	verAsiento
 
         </a>
-        <a routerLink="/verDetalleRpv" class="item">
+        <a routerLink="/verDetalleRpv" class="item" [class.active]="operacionActual=='/verDetalleRpv'">
           	verDetalleRPV
         </a>
         <div class="header item">RENIEC</div>
-        <a routerLink="/" class="item">
+        <a routerLink="/actualizarCredencial" class="item" [class.active]="operacionActual=='/actualizarCredencial'">
           actualizarcredencial
         </a>
-        <a routerLink="/" class="item">
+        <a routerLink="/consultar" class="item" [class.active]="operacionActual=='/consultar'">
           consultar
         </a>
       </div>
+
       <div *ngFor="let el of log; index as i" class="ui vertical inverted segment" [class.red]="el.tipo=='error'" [class.green]="el.tipo=='success'">
         {{el.message}}
       </div>

@@ -5,20 +5,20 @@
       <form class="ui form" (ngSubmit)="consultar()">
 
         <div class="field" >
-          <label>Apellido Paterno</label>
+          <label>DNI a consultar</label>
           <input type="text" name="nuDniConsulta" placeholder="DNI a consultar" [(ngModel)]="usuario.nuDniConsulta">
         </div>
         <div class="field" >
-          <label>Apallido Materno</label>
+          <label>DNI usuario</label>
           <input type="text" name="nuDniUsuario" placeholder="DNI usuario" [(ngModel)]="usuario.nuDniUsuario">
         </div>
         <div class="field" >
-          <label>Nombres</label>
+          <label>RUC entidad</label>
           <input type="text" name="nuDniUsuario" placeholder="RUC entidad" [(ngModel)]="usuario.nuDniUsuario">
         </div>
         <div class="field" >
-          <label>Razon Social</label>
-          <input type="text" name="password" placeholder="Clave usuario" [(ngModel)]="usuario.password">
+          <label>Clave usuario</label>
+          <input type="password" name="password" placeholder="Clave usuario" [(ngModel)]="usuario.password">
         </div>
 
         <button class="ui button" type="submit">Buscar</button>

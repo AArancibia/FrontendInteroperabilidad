@@ -1,3 +1,50 @@
-<p>
-  actualizar-credencial works!
-</p>
+<div class="ui grid">
+  <div class="row one column">
+    <div class="column">
+      <!--formulario de busqueda-->
+      <form class="ui form" (ngSubmit)="actualizar()">
+
+        <div class="field" >
+          <label>Clave anterior</label>
+          <input type="password" name="credencialAnterior" placeholder="Credencial Anterior" [(ngModel)]="userCredencial.credencialAnterior">
+        </div>
+        <div class="field" >
+          <label>Nueva Clave</label>
+          <input type="password" name="credencialNueva" placeholder="Credencial Nueva" [(ngModel)]="userCredencial.credencialNueva">
+        </div>
+        <div class="field" >
+          <label>DNI usuario</label>
+          <input type="text" name="nuDni" placeholder="DNI" [(ngModel)]="userCredencial.nuDni">
+        </div>
+        <div class="field" >
+          <label>RUC entidad</label>
+          <input type="text" name="nuRUC" placeholder="RUC" [(ngModel)]="userCredencial.nuRUC">
+        </div>
+
+        <button class="ui button" type="submit">Buscar</button>
+      </form>
+
+
+    </div>
+  </div>
+
+  <div class="one column row">
+    <div class="column">
+      <h1 class="ui header">Resultado</h1>
+      <!--mostrar resultado-->
+      <div *ngFor="let titu of datos;index as i" class="ui divided selection list">
+        <a class="item" >
+          <div class="ui blue horizontal label"># RESULTADO</div>
+          {{i+1}}
+        </a>
+        <a class="item" *ngFor="let elementos of titu | keys">
+          <div class="ui  horizontal label">{{elementos.key}}</div>
+          {{elementos.value}}
+        </a>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
