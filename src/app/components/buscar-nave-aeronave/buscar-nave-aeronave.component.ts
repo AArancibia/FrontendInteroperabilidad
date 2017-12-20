@@ -14,8 +14,9 @@ export class BuscarNaveAeronaveComponent implements OnInit {
 
   }
  getNaveAeronave(matricula){
-    this.pide.getAeronave(matricula).then(res=>{
-      this.datos= res;
+    this.pide.getAeronave(matricula).then((res)=>{
+      this.datos= res.json().respuestaNaveAeronave[0];
+      console.log(this.datos);
     })
    // this.buscarNave.getNave(matricula).then(res=>{
    //    this.datos=res;

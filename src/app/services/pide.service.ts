@@ -4,7 +4,7 @@ import {Http} from "@angular/http";
 
 @Injectable()
 export class PideService {
-  baseUrl =  'http://192.168.10.6:5050/platpide';
+  baseUrl =  'http://192.168.10.201:8080';
 
 
 
