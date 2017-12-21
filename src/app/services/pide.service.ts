@@ -1,16 +1,19 @@
 import { Injectable } from '@angular/core';
 import {Client, SOAPService} from "ngx-soap";
 import {Http} from "@angular/http";
+import {PlatformLocation} from "@angular/common";
 
 @Injectable()
 export class PideService {
-  baseUrl =  'http://192.168.10.201:8080';
+  baseUrl =  'platpide';
 
 
 
 
 
-  constructor(private http: Http,private soap: SOAPService) { }
+  constructor(private http: Http,private soap: SOAPService, platformLocation:PlatformLocation) {
+    console.log((platformLocation as any).location)
+  }
 
   getWsdl() {
     const url = 'https://ws3.pide.gob.pe/services/SunarpPideService?wsdl';
@@ -61,7 +64,7 @@ export class PideService {
 
 
   getAeronave(matricula:string):Promise<any>{
-    const url = this.baseUrl+'/aeronave/'+matricula;
+    const url = 'aeronave/'+matricula;
     return this.http.post(url,{})
       .toPromise()
       .then(response => response).catch(this.handleError);
