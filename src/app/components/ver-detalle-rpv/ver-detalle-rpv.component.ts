@@ -19,10 +19,18 @@ export class VerDetalleRpvComponent implements OnInit {
   }
 
   verDetalleAsiento(){
-    this.pide.getData(this.detalleAsiento,"verDetalleRPV").then(res=>{
-      this.datos=res.Body.verDetalleRPVResponse.vehiculo;
+
+    this.pide.getDataUrlWithinBody(this.detalleAsiento,'detallerpv').then(res=>{
+      this.datos = res.json();
+      console.log(this.datos);
     },err=>{
-      this.logger.addLogMessage(err);
-    })
+      this.logger.addLogMessage({tipo:"error",message:err});
+
+    });
+    // this.pide.getData(this.detalleAsiento,"verDetalleRPV").then(res=>{
+    //   this.datos=res.Body.verDetalleRPVResponse.vehiculo;
+    // },err=>{
+    //   this.logger.addLogMessage(err);
+    // })
   }
 }

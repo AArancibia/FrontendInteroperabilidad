@@ -63,12 +63,30 @@ export class PideService {
   }
 
 
-  getAeronave(matricula:string):Promise<any>{
-    const url = 'aeronave/'+matricula;
+  // getAeronave(matricula:string):Promise<any>{
+  //   const url = 'aeronave/'+matricula;
+  //   return this.http.post(url,{})
+  //     .toPromise()
+  //     .then(response => response).catch(this.handleError);
+  // }
+
+
+  getDataUrlWithoutBody(id:string,name:string){
+    const url = name+'/'+id;
     return this.http.post(url,{})
       .toPromise()
       .then(response => response).catch(this.handleError);
   }
+
+  getDataUrlWithinBody(body:any,name:string){
+
+    return this.http.post(name,body)
+      .toPromise()
+      .then(response => response).catch(this.handleError);
+  }
+
+
+
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);

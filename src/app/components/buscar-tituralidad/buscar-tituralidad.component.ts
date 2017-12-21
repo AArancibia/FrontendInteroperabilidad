@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Titular} from "../../entities/titular";
 import {BuscarTitularidadService} from "../../services/buscar-titularidad.service";
+import {PideService} from "../../services/pide.service";
+import {ComunicatorService} from "../../services/comunicator.service";
 
 @Component({
   selector: 'app-buscar-tituralidad',
@@ -11,7 +13,7 @@ export class BuscarTituralidadComponent implements OnInit {
 titular:Titular;
 datos:any;
 isNatural=true;
-  constructor(private titularService:BuscarTitularidadService) {
+  constructor(private pide:PideService, private logger: ComunicatorService) {
     this.titular = new Titular();
   }
 
@@ -35,20 +37,30 @@ isNatural=true;
       this.titular.razonSocial="";
     }
 
-    this.titularService.getTitularidad({
-      tipoParticipante:this.titular.tipoParticipante,
-      apellidoPaterno:this.titular.apellidoPaterno,
-      apellidoMaterno:this.titular.apellidoMaterno,
-      Nombres:this.titular.Nombres,
-      razonSocial:this.titular.razonSocial
-    }).then(
-      (res)=>{
-      console.log(JSON.stringify(this.datos));
-      this.datos=res.buscarTitularidadResponse.respuestaTitularidad.respuestaTitularidad;
+    this.pide.getDataUrlWithinBody(this.titular,'titularidad').then(res=>{
+      this.datos = res.json();
+      console.log(this.datos);
+    },err=>{
+      this.logger.addLogMessage({tipo:"error",message:err});
 
-    },(err)=>{
-      console.log(err);
     });
+    // this.titularService.getTitularidad({
+    //   tipoParticipante:this.titular.tipoParticipante,
+    //   apellidoPaterno:this.titular.apellidoPaterno,
+    //   apellidoMaterno:this.titular.apellidoMaterno,
+    //   Nombres:this.titular.Nombres,
+    //   razonSocial:this.titular.razonSocial
+    // }).then(
+    //   (res)=>{
+    //   console.log(JSON.stringify(this.datos));
+    //   this.datos=res.buscarTitularidadResponse.respuestaTitularidad.respuestaTitularidad;
+    //
+    // },(err)=>{
+    //   console.log(err);
+    // });
+
+
+
   }
  cambiarPersona(tipo:string){
       this.isNatural = (tipo==="J")?false:true;

@@ -47,7 +47,8 @@
       </div>
       <h3 class="ui header">Fichas</h3>
       <div  class="ui divided selection list">
-        <a class="item" *ngFor="let fichas of datos.listFichas|keys">
+
+        <a class="item" *ngFor="let fichas of datos.listFichas[0]|keys">
           <div class="ui  horizontal label">{{fichas.key}}</div>
           <ng-container *ngIf="fichas.key!='listPag'">{{fichas.value}}</ng-container>
           <ng-container *ngIf="fichas.key=='listPag'">
@@ -71,7 +72,15 @@
       <div *ngFor="let asientos of datos.listAsientos" class="ui divided selection list">
         <a class="item" *ngFor="let asien of asientos|keys">
           <div class="ui  horizontal label">{{asien.key}}</div>
-          {{asien.value}}
+          <ng-container *ngIf="asien.key!='listPag'">{{asien.value}}</ng-container>
+          <ng-container *ngIf="asien.key=='listPag'">
+            <div   class="ui divided selection list" *ngFor="let pagina of asien.value">
+              <a *ngFor="let elem of pagina|keys" class="item">
+                <div class="ui  horizontal label">{{elem.key}}</div>
+                {{elem.value}}
+              </a>
+            </div>
+          </ng-container>
         </a>
       </div>
     </div>

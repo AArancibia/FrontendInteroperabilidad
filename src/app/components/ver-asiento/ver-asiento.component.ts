@@ -19,10 +19,18 @@ datos:any
   ngOnInit() {
   }
   verAsiento(){
-    this.pide.getData(this.vistaAsiento,"verAsiento").then(res=>{
-      this.datos = res.Body.verAsientoResponse;
-    }, err=>{
-      this.logger.addLogMessage(err);
-    })
+
+    this.pide.getDataUrlWithinBody(this.vistaAsiento,'verasiento').then(res=>{
+      this.datos = res._body;
+      console.log(this.datos);
+    },err=>{
+      this.logger.addLogMessage({tipo:"error",message:err});
+
+    });
+    // this.pide.getData(this.vistaAsiento,"verAsiento").then(res=>{
+    //   this.datos = res.Body.verAsientoResponse;
+    // }, err=>{
+    //   this.logger.addLogMessage(err);
+    // })
   }
 }

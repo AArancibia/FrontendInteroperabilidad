@@ -32,6 +32,15 @@
         <a *ngFor="let vh of datos|keys" class="item">
           <div class="ui  horizontal label">{{vh.key}}</div>
           {{vh.value}}
+          <ng-container *ngIf="vh.key!='propietarios'">{{vh.value}}</ng-container>
+          <ng-container *ngIf="vh.key=='propietarios'">
+            <div   class="ui divided selection list" *ngFor="let nombre of vh.value.nombre">
+              <a *ngFor="let elem of nombre|keys" class="item">
+                <div class="ui  horizontal label">{{elem.key}}</div>
+                {{elem.value}}
+              </a>
+            </div>
+          </ng-container>
         </a>
 
       </div>

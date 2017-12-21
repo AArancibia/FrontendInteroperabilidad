@@ -20,9 +20,17 @@ datos:any;
   ngOnInit() {
   }
   buscarAsiento(){
-    this.pide.getData(this.asiento,"listarAsientos").then((res)=>{
-     this.datos = res.Body.listarAsientosResponse.asientos;
-      console.log(JSON.stringify(res),res);
+    // this.pide.getData(this.asiento,"listarAsientos").then((res)=>{
+    //  this.datos = res.Body.listarAsientosResponse.asientos;
+    //   console.log(JSON.stringify(res),res);
+    //   this.logger.addLogMessage({tipo:"success",message:"funciono"});
+    // },(err)=>{
+    //   this.logger.addLogMessage({tipo:"error",message:err});
+    // })
+
+    this.pide.getDataUrlWithinBody(this.asiento,"asientos").then((res)=>{
+      this.datos = res.json();
+      console.log(this.datos);
       this.logger.addLogMessage({tipo:"success",message:"funciono"});
     },(err)=>{
       this.logger.addLogMessage({tipo:"error",message:err});
