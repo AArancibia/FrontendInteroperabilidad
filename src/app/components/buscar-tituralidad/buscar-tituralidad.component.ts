@@ -30,15 +30,15 @@ isNatural=true;
     if(!this.titular.apellidoPaterno){
       this.titular.apellidoPaterno="";
     }
-    if(!this.titular.Nombres){
-      this.titular.Nombres="";
+    if(!this.titular.nombres){
+      this.titular.nombres="";
     }
     if(!this.titular.razonSocial){
       this.titular.razonSocial="";
     }
 
     this.pide.getDataUrlWithinBody(this.titular,'titularidad').then(res=>{
-      this.datos = res.json();
+      this.datos = res.json().respuestaTitularidad;
       console.log(this.datos);
     },err=>{
       this.logger.addLogMessage({tipo:"error",message:err});
@@ -48,7 +48,7 @@ isNatural=true;
     //   tipoParticipante:this.titular.tipoParticipante,
     //   apellidoPaterno:this.titular.apellidoPaterno,
     //   apellidoMaterno:this.titular.apellidoMaterno,
-    //   Nombres:this.titular.Nombres,
+    //   nombres:this.titular.nombres,
     //   razonSocial:this.titular.razonSocial
     // }).then(
     //   (res)=>{
