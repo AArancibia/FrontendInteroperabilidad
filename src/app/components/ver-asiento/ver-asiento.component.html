@@ -39,8 +39,10 @@
     <div class="column">
       <h1 class="ui header">Resultado</h1>
       <!--mostrar resultado-->
-
-      <img *ngIf="datos" src="data:image/jpg;base64,{{datos}}" alt="">
+      <img [src]="imageToShow"
+           alt="Place image title"
+           *ngIf="!isImageLoading">
+      <!--<img *ngIf="datos" src="data:image/jpg;base64,{{datos}}" alt="">-->
     </div>
 
   </div>

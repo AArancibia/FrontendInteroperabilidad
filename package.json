@@ -26,6 +26,7 @@
     "jquery": "^3.2.1",
     "ngx-soap": "^0.2.2-beta4",
     "rxjs": "^5.1.0",
+    "xml2json-light": "^1.0.4",
     "zone.js": "^0.8.4"
   },
   "devDependencies": {

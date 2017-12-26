@@ -16,7 +16,8 @@ export class BuscarNaveAeronaveComponent implements OnInit {
   }
  getNaveAeronave(matricula){
 
-   this.pide.getDataUrlWithoutBody(matricula,"aeronave").then((res)=>{
+   this.pide.getDataUrlWithoutBody(matricula,"ae" +
+     "ronave").then((res)=>{
      this.datos= res.json().respuestaNaveAeronave[0];
 
    },err=>{

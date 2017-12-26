@@ -10,7 +10,9 @@ import {ComunicatorService} from "../../services/comunicator.service";
 })
 export class VerAsientoComponent implements OnInit {
 vistaAsiento:VistaAsiento;
-datos:any
+datos:any;
+  isImageLoading=true;
+  imageToShow: any;
   constructor(private pide: PideService, private logger:ComunicatorService) {
     this.vistaAsiento = new VistaAsiento();
 
@@ -18,12 +20,30 @@ datos:any
 
   ngOnInit() {
   }
+
+
+
+  createImageFromBlob(image: Blob) {
+    let reader = new FileReader();
+    reader.addEventListener("load", () => {
+      this.imageToShow = reader.result;
+    }, false);
+
+    if (image) {
+      reader.readAsDataURL(image);
+    }
+  }
   verAsiento(){
 
-    this.pide.getDataUrlWithinBody(this.vistaAsiento,'verasiento').then(res=>{
-      this.datos = res._body;
-      console.log(this.datos);
+    // this.pide.getDataUrlWithinBody(this.vistaAsiento,'verasiento')
+    this.pide.getImgAsiento(this.vistaAsiento)
+    .then(res=>{
+      // this.datos = res.json();
+      this.createImageFromBlob(res);
+      this.isImageLoading = false;
+      console.log(this.imageToShow);
     },err=>{
+      this.isImageLoading = false;
       this.logger.addLogMessage({tipo:"error",message:err});
 
     });

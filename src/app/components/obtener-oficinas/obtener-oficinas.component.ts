@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {PideService} from "../../services/pide.service";
+import {parseString} from "xml2js";
 
 @Component({
   selector: 'app-obtener-oficinas',
@@ -15,8 +16,14 @@ export class ObtenerOficinasComponent implements OnInit {
   ngOnInit() {
   }
 obtenerOficinas(){
-    this.pide.getData({ser:""},"getOficinas").then((res)=>{
-      console.log(res);
+    this.pide.getDataUrlWithoutBody("","oficinasreg")
+      .then((res)=>{
+      parseString(res.text(),(err,resjs)=>{
+
+        this.data=resjs["soapenv:Envelope"]["soapenv:Header"][0]["ns2:oficina"][0].oficina
+          console.log(this.data);
+      });
+      console.log(res.text());
     })
 }
 }

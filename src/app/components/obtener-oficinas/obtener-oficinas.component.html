@@ -11,20 +11,44 @@
     <div class="column">
       <h1 class="ui header">Resultado</h1>
       <!--mostrar resultado-->
-      <div class="ui divided selection list">
-        <a class="item">
-          <div class="ui  horizontal label">Codigo Zona</div>
-          Kumquats
-        </a>
-        <a class="item">
-          <div class="ui  horizontal label">Codigo Oficina</div>
-          Ice Cream
-        </a>
-        <a class="item">
-          <div class="ui  horizontal label">Descripcion</div>
-          Orange
-        </a>
-      </div>
+      <!--<div class="ui divided selection list" *ngFor="let oficina of data; index as i">-->
+        <!--<a class="item">-->
+          <!--<div class="ui blue horizontal label">oficina #</div>-->
+          <!--{{i+1}}-->
+        <!--</a>-->
+        <!--<a class="item" *ngFor="let el of oficina|keys">-->
+          <!--<div class="ui  horizontal label">{{el.key}}</div>-->
+          <!--{{el.value}}-->
+        <!--</a>-->
+      <!--</div>-->
+    </div>
+    <div class="column">
+      <table class="ui celled table">
+        <thead>
+        <tr >
+          <th>
+            #
+          </th>
+          <th *ngFor="let titulo of data[0]|keys">
+            {{titulo.key}}
+          </th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let oficina of data; index as i">
+          <td>
+            <div class="ui ribbon label">{{i+1}}</div>
+          </td>
+          <td *ngFor="let el of oficina|keys; first as isFirst">
+           {{el.value}}
+          </td>
+
+        </tr>
+
+        </tbody>
+
+      </table>
     </div>
 
   </div>

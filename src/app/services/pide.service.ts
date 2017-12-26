@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import {Client, SOAPService} from "ngx-soap";
-import {Http} from "@angular/http";
+import {Http, ResponseContentType} from "@angular/http";
 import {PlatformLocation} from "@angular/common";
 
 @Injectable()
 export class PideService {
-  baseUrl =  'platpide';
+  // baseUrl =  '';
+  baseUrl =  'http://192.168.10.6:5050/platpide/';
 
 
 
@@ -72,7 +73,7 @@ export class PideService {
 
 
   getDataUrlWithoutBody(id:string,name:string){
-    const url = name+'/'+id;
+    const url = this.baseUrl+name+'/'+id;
     return this.http.post(url,{})
       .toPromise()
       .then(response => response).catch(this.handleError);
@@ -80,11 +81,16 @@ export class PideService {
 
   getDataUrlWithinBody(body:any,name:string){
 
-    return this.http.post(name,body)
+    return this.http.post(this.baseUrl+name,body)
       .toPromise()
       .then(response => response).catch(this.handleError);
   }
+  getImgAsiento(body:any){
 
+    return this.http.post(this.baseUrl+"verasiento",body,{ responseType: ResponseContentType.Blob })
+      .toPromise()
+      .then((res) => res.blob()).catch(this.handleError);
+  }
 
 
   private handleError(error: any): Promise<any> {

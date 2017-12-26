@@ -16,13 +16,27 @@
     <div class="column">
 
       <!--mostrar resultado-->
-      <div class="ui divided selection list">
+      <div class="ui divided selection list" *ngIf="!datos">
         <a class="item" *ngFor="let element of data | keys">
           <div class="ui  horizontal label">{{element.key}}</div>
           {{element.value}}
         </a>
 
       </div>
+      <ng-container *ngIf="datos">
+        <div class="ui divided selection list" *ngFor="let razonsocial of datos;index as i" >
+          <a class="item" >
+            <div class="ui blue horizontal label">#</div>
+            {{i+1}}
+          </a>
+          <a class="item" *ngFor="let element of razonsocial | keys">
+            <div class="ui  horizontal label">{{element.key}}</div>
+            {{element.value}}
+          </a>
+
+        </div>
+      </ng-container>
+
     </div>
 
   </div>
