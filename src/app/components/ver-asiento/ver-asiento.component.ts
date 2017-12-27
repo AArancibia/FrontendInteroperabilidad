@@ -11,6 +11,7 @@ import {ComunicatorService} from "../../services/comunicator.service";
 export class VerAsientoComponent implements OnInit {
 vistaAsiento:VistaAsiento;
 datos:any;
+  loadingData=false;
   isImageLoading=true;
   imageToShow: any;
   constructor(private pide: PideService, private logger:ComunicatorService) {
@@ -34,15 +35,17 @@ datos:any;
     }
   }
   verAsiento(){
-
+    this.loadingData=true;
     // this.pide.getDataUrlWithinBody(this.vistaAsiento,'verasiento')
     this.pide.getImgAsiento(this.vistaAsiento)
     .then(res=>{
+      this.loadingData=false;
       // this.datos = res.json();
       this.createImageFromBlob(res);
       this.isImageLoading = false;
       console.log(this.imageToShow);
     },err=>{
+      this.loadingData=false;
       this.isImageLoading = false;
       this.logger.addLogMessage({tipo:"error",message:err});
 

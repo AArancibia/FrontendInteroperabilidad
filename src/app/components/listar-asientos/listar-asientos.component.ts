@@ -11,6 +11,7 @@ import {ComunicatorService} from "../../services/comunicator.service";
 export class ListarAsientosComponent implements OnInit {
 asiento:Asiento;
 datos:any;
+loadingData=false;
   constructor(private pide: PideService, private logger:ComunicatorService) {
     this.asiento= new Asiento();
     this.datos=[];
@@ -27,13 +28,15 @@ datos:any;
     // },(err)=>{
     //   this.logger.addLogMessage({tipo:"error",message:err});
     // })
-
+      this.loadingData=true;
     this.pide.getDataUrlWithinBody(this.asiento,"asientos").then((res)=>{
       this.datos = res.json();
       console.log(this.datos);
+      this.loadingData=false;
       this.logger.addLogMessage({tipo:"success",message:"funciono"});
     },(err)=>{
       this.logger.addLogMessage({tipo:"error",message:err});
+      this.loadingData=false;
     })
   }
 }

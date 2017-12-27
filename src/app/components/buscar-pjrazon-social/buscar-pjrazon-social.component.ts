@@ -10,6 +10,7 @@ import {ComunicatorService} from "../../services/comunicator.service";
 export class BuscarPJRazonSocialComponent implements OnInit {
   data:any;
   datos:any;
+  loadingData=false;
 
   constructor(private pide:PideService, private logger:ComunicatorService) { }
 
@@ -23,7 +24,7 @@ export class BuscarPJRazonSocialComponent implements OnInit {
   // }
 
   buscar(rsocial:string){
-
+    this.loadingData=true;
     this.pide.getDataUrlWithoutBody(rsocial,"razonsocial").then((res)=>{
       this.data= res.json()["soapenv:Envelope"]["soapenv:Header"]["ns2:personaJuridica"].resultado
       console.log(this.data.length);
@@ -31,9 +32,10 @@ export class BuscarPJRazonSocialComponent implements OnInit {
         this.datos = this.data;
       }
 
-
+      this.loadingData=false;
 
     },err=>{
+      this.loadingData=false;
       this.logger.addLogMessage({tipo:"error",message:err});
     })
 

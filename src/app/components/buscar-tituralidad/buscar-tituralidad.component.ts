@@ -13,6 +13,7 @@ export class BuscarTituralidadComponent implements OnInit {
 titular:Titular;
 datos:any;
 isNatural=true;
+loadingData=false;
   constructor(private pide:PideService, private logger: ComunicatorService) {
     this.titular = new Titular();
   }
@@ -21,6 +22,7 @@ isNatural=true;
   }
 
   buscarTitularidad(){
+    this.loadingData=true;
     if(!this.titular.tipoParticipante){
       this.titular.tipoParticipante="";
     }
@@ -40,9 +42,10 @@ isNatural=true;
     this.pide.getDataUrlWithinBody(this.titular,'titularidad').then(res=>{
       this.datos = res.json().respuestaTitularidad;
       console.log(this.datos);
+      this.loadingData=false;
     },err=>{
       this.logger.addLogMessage({tipo:"error",message:err});
-
+      this.loadingData=false;
     });
     // this.titularService.getTitularidad({
     //   tipoParticipante:this.titular.tipoParticipante,

@@ -11,6 +11,7 @@ import {ComunicatorService} from "../../services/comunicator.service";
 export class VerDetalleRpvComponent implements OnInit {
   detalleAsiento:DetalleAsiento;
   datos:any;
+  loadingData=false;
   constructor(private pide:PideService, private logger:ComunicatorService) {
     this.detalleAsiento = new DetalleAsiento();
   }
@@ -19,12 +20,14 @@ export class VerDetalleRpvComponent implements OnInit {
   }
 
   verDetalleAsiento(){
-
+      this.loadingData=true;
     this.pide.getDataUrlWithinBody(this.detalleAsiento,'detallerpv').then(res=>{
       this.datos = res.json();
       console.log(this.datos);
+      this.loadingData=false;
     },err=>{
       this.logger.addLogMessage({tipo:"error",message:err});
+      this.loadingData=false;
 
     });
     // this.pide.getData(this.detalleAsiento,"verDetalleRPV").then(res=>{

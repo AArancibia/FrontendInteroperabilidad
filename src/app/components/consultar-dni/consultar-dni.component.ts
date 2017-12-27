@@ -11,6 +11,7 @@ import {ComunicatorService} from "../../services/comunicator.service";
 export class ConsultarDniComponent implements OnInit {
 usuario:Usuario;
 datos:any;
+loadingData=false;
   constructor(private pide:PideService, private logger: ComunicatorService) {
     this.usuario = new Usuario;
   }
@@ -19,12 +20,14 @@ datos:any;
   }
 consultar(){
 
-
+  this.loadingData=true;
   this.pide.getDataUrlWithinBody(this.usuario,'buscardni').then(res=>{
     this.datos = res.json();
     console.log(this.datos);
+    this.loadingData=false;
   },err=>{
     this.logger.addLogMessage({tipo:"error",message:err});
+    this.loadingData=false;
   });
 }
 }

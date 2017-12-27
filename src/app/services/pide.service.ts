@@ -5,8 +5,8 @@ import {PlatformLocation} from "@angular/common";
 
 @Injectable()
 export class PideService {
-  // baseUrl =  '';
-  baseUrl =  'http://192.168.10.6:5050/platpide/';
+  baseUrl =  '';
+  // baseUrl =  'http://192.168.10.6:5050/platpide/';
 
 
 
