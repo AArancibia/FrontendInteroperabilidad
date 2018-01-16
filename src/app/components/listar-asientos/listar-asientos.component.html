@@ -7,13 +7,22 @@
     <div class="column">
       <!--formulario de busqueda-->
       <form class="ui form" (ngSubmit)="buscarAsiento()">
-        <div class="field">
-          <label>Zona</label>
-          <input type="text" name="zona" placeholder="Zona" [(ngModel)]="asiento.zona">
-        </div>
+        <!--<div class="field">-->
+          <!--<label>Zona</label>-->
+          <!--<input type="text" name="zona" placeholder="Zona" [(ngModel)]="asiento.zona">-->
+        <!--</div>-->
+        <!--<div class="field">-->
+          <!--<label>Oficina</label>-->
+          <!--<input type="text" name="oficina" placeholder="Oficina" [(ngModel)]="asiento.oficina">-->
+        <!--</div>-->
         <div class="field">
           <label>Oficina</label>
-          <input type="text" name="oficina" placeholder="Oficina" [(ngModel)]="asiento.oficina">
+          <select name="" class="ui fluid search" (change)="selectOficina(oficina.value)" [ngClass]="{loading:!loadingDataSelect}" #oficina appDropdown>
+            <option value=""></option>
+            <option value="{{oficina.codOficina+'_'+oficina.codZona}}" *ngFor="let oficina of dataOficina">{{oficina.descripcion}}</option>
+          </select>
+
+
         </div>
         <div class="field">
           <label>Partida</label>
@@ -21,7 +30,15 @@
         </div>
         <div class="field">
           <label>Registro</label>
-          <input type="text" name="registro" placeholder="Registro" [(ngModel)]="asiento.registro">
+          <!--<input type="text" name="registro" placeholder="Registro" [(ngModel)]="asiento.registro">-->
+
+          <select name="registro" class="ui fluid dropdown" [(ngModel)]="asiento.registro"  appDropdown>
+            <option value=""></option>
+            <option value="21000">Propiedad Inmueble</option>
+            <option value="22000">Personas Jurídicas</option>
+            <option value="23000">Personas Naturales</option>
+
+          </select>
         </div>
 
         <button class="ui button" type="submit">Buscar</button>

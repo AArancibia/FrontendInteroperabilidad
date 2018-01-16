@@ -11,7 +11,9 @@ import {ComunicatorService} from "../../services/comunicator.service";
 export class ListarAsientosComponent implements OnInit {
 asiento:Asiento;
 datos:any;
+dataOficina:any;
 loadingData=false;
+loadingDataSelect=false;
   constructor(private pide: PideService, private logger:ComunicatorService) {
     this.asiento= new Asiento();
     this.datos=[];
@@ -19,6 +21,7 @@ loadingData=false;
   }
 
   ngOnInit() {
+    this.obtenerOficinas();
   }
   buscarAsiento(){
     // this.pide.getData(this.asiento,"listarAsientos").then((res)=>{
@@ -38,5 +41,26 @@ loadingData=false;
       this.logger.addLogMessage({tipo:"error",message:err});
       this.loadingData=false;
     })
+  }
+
+  obtenerOficinas(){
+    this.loadingDataSelect=true;
+    this.pide.getDataUrlWithoutBody("","oficinasreg")
+      .then((res)=>{
+        this.dataOficina=res.json()["soapenv:Envelope"]["soapenv:Header"]["ns2:oficina"].oficina;
+        this.loadingDataSelect=false;
+        console.log(this.loadingDataSelect);
+      },err=>{
+        this.logger.addLogMessage({tipo:"error",message:err});
+        this.loadingDataSelect=false;
+      })
+  }
+
+  selectOficina(valOficina:string){
+
+    let dato = valOficina.split("_");
+    this.asiento.oficina=dato[0];
+    this.asiento.zona=dato[1];
+    console.log(this.asiento.oficina);
   }
 }
