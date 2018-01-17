@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, NgZone, OnInit} from '@angular/core';
 import {Asiento} from "../../entities/asiento";
 import {PideService} from "../../services/pide.service";
 import {ComunicatorService} from "../../services/comunicator.service";
@@ -14,7 +14,8 @@ datos:any;
 dataOficina:any;
 loadingData=false;
 loadingDataSelect=false;
-  constructor(private pide: PideService, private logger:ComunicatorService) {
+selectedFicha:any;
+  constructor(private pide: PideService, private logger:ComunicatorService,private zone:NgZone) {
     this.asiento= new Asiento();
     this.datos=[];
 
@@ -62,5 +63,22 @@ loadingDataSelect=false;
     this.asiento.oficina=dato[0];
     this.asiento.zona=dato[1];
     console.log(this.asiento.oficina);
+  }
+
+  nextImage(id:string){
+
+    let elemento = $(".shape");
+    console.log(elemento);
+      this.zone.runOutsideAngular(()=>{
+        elemento
+          .shape('set next side',id )
+          .shape('flip up');
+      });
+
+  }
+
+  selectFicha(ficha:any){
+    this.selectedFicha=ficha;
+
   }
 }

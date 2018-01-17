@@ -20,6 +20,8 @@ import {PideService} from "./services/pide.service";
 import {ComunicatorService} from "./services/comunicator.service";
 import { ConsultarDniComponent } from './components/consultar-dni/consultar-dni.component';
 import { ActualizarCredencialComponent } from './components/actualizar-credencial/actualizar-credencial.component';
+import { ShapePipe } from './pipes/shape.pipe';
+import { ShapeDirective } from './directives/shape.directive';
 
 
 @NgModule({
@@ -35,7 +37,9 @@ import { ActualizarCredencialComponent } from './components/actualizar-credencia
     KeysPipe,
     DropdownDirective,
     ConsultarDniComponent,
-    ActualizarCredencialComponent
+    ActualizarCredencialComponent,
+    ShapePipe,
+    ShapeDirective
   ],
   imports: [
     FormsModule,

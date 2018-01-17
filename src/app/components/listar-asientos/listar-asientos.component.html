@@ -63,6 +63,34 @@
         </a>
       </div>
       <h3 class="ui header">Fichas</h3>
+      <div class="ui grid" *ngIf="datos.listFichas">
+
+        <div class="five wide column">
+          <select name="" id="" multiple>
+            <option value="" *ngFor="let fichas of datos.listFichas" (click)="selectFicha(fichas)">{{fichas.idImgFicha}}</option>
+          </select>
+
+        </div>
+        <div class="eleven wide column">
+          <div class="large ui buttons">
+            <button class="ui button" *ngFor="let pagina of selectedFicha?.listPag; first as isFirst" (click)="nextImage('#'+selectedFicha.idImgFicha+'_'+pagina.pagina)">{{pagina.pagina}}</button>
+
+          </div>
+          <div class="ui cube shape" appShape>
+            <div class="sides">
+              <div class=" side" *ngFor="let pagina of selectedFicha?.listPag; first as isFirst"  id="{{selectedFicha.idImgFicha+'_'+pagina.pagina}}">
+                <div class="content">
+                  <div class="center">
+                    {{pagina.pagina}}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
       <div  class="ui divided selection list">
       <ng-container *ngIf="datos.listFichas">
         <a class="item" *ngFor="let fichas of datos.listFichas[0]|keys">
