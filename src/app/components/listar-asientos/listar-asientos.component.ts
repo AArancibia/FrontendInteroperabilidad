@@ -2,6 +2,7 @@ import {Component, NgZone, OnInit} from '@angular/core';
 import {Asiento} from "../../entities/asiento";
 import {PideService} from "../../services/pide.service";
 import {ComunicatorService} from "../../services/comunicator.service";
+import {VistaAsiento} from "../../entities/vista-asiento";
 
 @Component({
   selector: 'app-listar-asientos',
@@ -14,8 +15,12 @@ datos:any;
 dataOficina:any;
 loadingData=false;
 loadingDataSelect=false;
+  isImageLoading=true;
 selectedFicha:any;
+  vistaAsiento:VistaAsiento;
+  imageToShow: any;
   constructor(private pide: PideService, private logger:ComunicatorService,private zone:NgZone) {
+    this.vistaAsiento = new VistaAsiento();
     this.asiento= new Asiento();
     this.datos=[];
 
@@ -23,6 +28,7 @@ selectedFicha:any;
 
   ngOnInit() {
     this.obtenerOficinas();
+
   }
   buscarAsiento(){
     // this.pide.getData(this.asiento,"listarAsientos").then((res)=>{
@@ -65,14 +71,17 @@ selectedFicha:any;
     console.log(this.asiento.oficina);
   }
 
-  nextImage(id:string){
+  nextImage(pagina:string){
 
-    let elemento = $(".shape");
+    let elemento = $("#imgFichas.shape");
     console.log(elemento);
+    console.log($('#'+this.selectedFicha.idImgFicha+'_'+pagina) );
+
+    elemento
+      .shape('set next side',$('#'+this.selectedFicha.idImgFicha+'_'+pagina))
+      .shape('flip up');
       this.zone.runOutsideAngular(()=>{
-        elemento
-          .shape('set next side',id )
-          .shape('flip up');
+
       });
 
   }
@@ -80,5 +89,40 @@ selectedFicha:any;
   selectFicha(ficha:any){
     this.selectedFicha=ficha;
 
+  }
+
+
+
+  createImageFromBlob(image: Blob) {
+    let reader = new FileReader();
+    reader.addEventListener("load", () => {
+      this.imageToShow = reader.result;
+    }, false);
+
+    if (image) {
+      reader.readAsDataURL(image);
+    }
+  }
+  verAsiento(vistaAsiento:VistaAsiento){
+    this.loadingData=true;
+    // this.pide.getDataUrlWithinBody(this.vistaAsiento,'verasiento')
+    this.pide.getImgAsiento(vistaAsiento)
+      .then(res=>{
+
+        // this.datos = res.json();
+        this.createImageFromBlob(res);
+        this.isImageLoading = false;
+
+      },err=>{
+
+        this.isImageLoading = false;
+        this.logger.addLogMessage({tipo:"error",message:err});
+
+      });
+    // this.pide.getData(this.vistaAsiento,"verAsiento").then(res=>{
+    //   this.datos = res.Body.verAsientoResponse;
+    // }, err=>{
+    //   this.logger.addLogMessage(err);
+    // })
   }
 }

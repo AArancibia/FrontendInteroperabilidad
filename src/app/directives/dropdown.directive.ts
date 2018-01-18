@@ -12,6 +12,7 @@ export class DropdownDirective implements AfterViewInit {
     this.zone.runOutsideAngular(()=>{
       $(this.elemento.nativeElement).dropdown();
 
+
     });
 
   }

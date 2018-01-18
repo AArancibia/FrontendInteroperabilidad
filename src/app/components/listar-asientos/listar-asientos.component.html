@@ -73,15 +73,18 @@
         </div>
         <div class="eleven wide column">
           <div class="large ui buttons">
-            <button class="ui button" *ngFor="let pagina of selectedFicha?.listPag; first as isFirst" (click)="nextImage('#'+selectedFicha.idImgFicha+'_'+pagina.pagina)">{{pagina.pagina}}</button>
+            <button class="ui button" *ngFor="let pagina of selectedFicha?.listPag; first as isFirst" (click)="nextImage(pagina.pagina)">{{pagina.pagina}}</button>
 
           </div>
-          <div class="ui cube shape" appShape>
+          <div class="ui cube shape" appShape id="imgFichas">
             <div class="sides">
-              <div class=" side" *ngFor="let pagina of selectedFicha?.listPag; first as isFirst"  id="{{selectedFicha.idImgFicha+'_'+pagina.pagina}}">
+              <div class=" side" *ngFor="let pagina of selectedFicha?.listPag; first as isFirst"  id="{{selectedFicha.idImgFicha+'_'+pagina.pagina}}" >
                 <div class="content">
                   <div class="center">
                     {{pagina.pagina}}
+                    <img [src]="imageToShow"
+                         alt="Place image title"
+                         *ngIf="!isImageLoading">
                   </div>
                 </div>
               </div>
