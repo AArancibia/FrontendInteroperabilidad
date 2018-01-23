@@ -22,6 +22,7 @@ import { ConsultarDniComponent } from './components/consultar-dni/consultar-dni.
 import { ActualizarCredencialComponent } from './components/actualizar-credencial/actualizar-credencial.component';
 import { ShapePipe } from './pipes/shape.pipe';
 import { ShapeDirective } from './directives/shape.directive';
+import { ModalDirective } from './directives/modal.directive';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { ShapeDirective } from './directives/shape.directive';
     ConsultarDniComponent,
     ActualizarCredencialComponent,
     ShapePipe,
-    ShapeDirective
+    ShapeDirective,
+    ModalDirective
   ],
   imports: [
     FormsModule,

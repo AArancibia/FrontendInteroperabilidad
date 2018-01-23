@@ -10,15 +10,26 @@ import {VistaAsiento} from "../../entities/vista-asiento";
   styleUrls: ['./listar-asientos.component.less']
 })
 export class ListarAsientosComponent implements OnInit {
-asiento:Asiento;
-datos:any;
-dataOficina:any;
-loadingData=false;
-loadingDataSelect=false;
-  isImageLoading=true;
-selectedFicha:any;
-  vistaAsiento:VistaAsiento;
-  imageToShow: any;
+  asiento: Asiento;
+  datos: any;
+  dataOficina: any;
+  loadingData = false;
+  loadingDataSelect = false;
+  isImageLoading = true;
+  isFolioImageLoading=true;
+
+  selectedFicha: any;
+  selectedFolio: any;
+
+  vistaAsiento: VistaAsiento;
+  imageToShowFichas: any;
+  imageToShowFolio: any;
+  dataFichaAsiento: VistaAsiento;
+  dataFolioAsiento: VistaAsiento;
+  imgModal:any;
+
+
+
   constructor(private pide: PideService, private logger:ComunicatorService,private zone:NgZone) {
     this.vistaAsiento = new VistaAsiento();
     this.asiento= new Asiento();
@@ -71,7 +82,11 @@ selectedFicha:any;
     console.log(this.asiento.oficina);
   }
 
-  nextImage(pagina:string){
+  nextImage(pagina:string,paginaRef:string){
+    this.dataFichaAsiento.pagina=pagina;
+    this.dataFichaAsiento.nroPagRef=paginaRef;
+    this.verAsiento(this.dataFichaAsiento,this.imageToShowFichas,this.isImageLoading);
+
 
     let elemento = $("#imgFichas.shape");
     console.log(elemento);
@@ -79,7 +94,7 @@ selectedFicha:any;
 
     elemento
       .shape('set next side',$('#'+this.selectedFicha.idImgFicha+'_'+pagina))
-      .shape('flip up');
+      .shape('flip right');
       this.zone.runOutsideAngular(()=>{
 
       });
@@ -88,34 +103,55 @@ selectedFicha:any;
 
   selectFicha(ficha:any){
     this.selectedFicha=ficha;
+    this.dataFichaAsiento = new VistaAsiento();
+    this.dataFichaAsiento.idImg = this.selectedFicha.idImgFicha;
+    this.dataFichaAsiento.tipo = this.selectedFicha.tipo;
+    // pagina.nroPagRef = this.selectedFicha.nroPagRef;
+    // pagina.pagina = this.selectedFicha.pagina;
+    this.dataFichaAsiento.nroTotalPag = this.datos.nroTotalPag;
+    this.dataFichaAsiento.transaccion = this.datos.transaccion;
 
+
+
+  }
+
+  selectFolio(folio:any){
+    this.selectedFolio=folio;
+    this.dataFolioAsiento = new VistaAsiento();
+    this.dataFolioAsiento.idImg = this.selectedFolio.idImgFolio;
+    this.dataFolioAsiento.tipo = this.selectedFolio.tipo;
+    this.dataFolioAsiento.nroPagRef = this.selectedFolio.nroPagRef;
+    this.dataFolioAsiento.pagina = this.selectedFolio.pagina;
+    this.dataFolioAsiento.nroTotalPag = this.datos.nroTotalPag;
+    this.dataFolioAsiento.transaccion = this.datos.transaccion;
+    this.verAsiento(this.dataFolioAsiento,this.imageToShowFolio,this.isFolioImageLoading);
   }
 
 
 
-  createImageFromBlob(image: Blob) {
+  createImageFromBlob(image: Blob,imageToShow) {
     let reader = new FileReader();
     reader.addEventListener("load", () => {
-      this.imageToShow = reader.result;
+      imageToShow = reader.result;
     }, false);
 
     if (image) {
       reader.readAsDataURL(image);
     }
   }
-  verAsiento(vistaAsiento:VistaAsiento){
-    this.loadingData=true;
+  verAsiento(vistaAsiento:VistaAsiento,imageToShow,imageLoading:boolean){
+    imageLoading=true;
     // this.pide.getDataUrlWithinBody(this.vistaAsiento,'verasiento')
     this.pide.getImgAsiento(vistaAsiento)
       .then(res=>{
 
         // this.datos = res.json();
-        this.createImageFromBlob(res);
-        this.isImageLoading = false;
+        this.createImageFromBlob(res,imageToShow);
+        imageLoading = false;
 
       },err=>{
 
-        this.isImageLoading = false;
+        imageLoading = false;
         this.logger.addLogMessage({tipo:"error",message:err});
 
       });
@@ -124,5 +160,13 @@ selectedFicha:any;
     // }, err=>{
     //   this.logger.addLogMessage(err);
     // })
+  }
+
+  mostrarImagen(event){
+    $('.ui.basic.modal')
+      .modal('show')
+    ;
+    console.log(event.currentTarget);
+    this.imgModal=event.currentTarget.src;
   }
 }
