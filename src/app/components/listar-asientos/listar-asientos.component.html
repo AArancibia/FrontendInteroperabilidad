@@ -88,7 +88,7 @@
           <div class="ui grid">
             <div class="one column row">
               <div class="column"><div class="large ui buttons">
-                <button class="ui button" *ngFor="let pagina of selectedFicha?.listPag; first as isFirst" (click)="nextImage(pagina.pagina,pagina.nroPagRef)">{{pagina.pagina}}</button>
+                <button class="ui button" *ngFor="let pagina of selectedFicha?.listPag; first as isFirst" (click)="nextImage(pagina.pagina,pagina.nroPagRef,'imgFichas')">{{pagina.pagina}}</button>
 
               </div>
               </div>
@@ -138,7 +138,6 @@
                     <div class=" active side"  id="{{selectedFolio.idImgFolio+'_'+selectedFolio.pagina}}" >
                       <div class="content">
                         <div class="center">
-                          {{isFolioImageLoading}}
                           <img [src]="imageToShowFolio"
                                alt="{{selectedFolio.pagina}}"
                                *ngIf="!isFolioImageLoading" (click)="mostrarImagen($event)" >
@@ -159,27 +158,55 @@
 
         </div>
       </div>
-      <div *ngFor="let folios of datos.listFolios" class="ui divided selection list">
-        <a class="item" *ngFor="let fol of folios|keys">
-          <div class="ui  horizontal label">{{fol.key}}</div>
-          {{fol.value}}
-        </a>
-      </div>
+
       <h3 class="ui header">Asientos</h3>
-      <div *ngFor="let asientos of datos.listAsientos" class="ui divided selection list">
-        <a class="item" *ngFor="let asien of asientos|keys">
-          <div class="ui  horizontal label">{{asien.key}}</div>
-          <ng-container *ngIf="asien.key!='listPag'">{{asien.value}}</ng-container>
-          <ng-container *ngIf="asien.key=='listPag'">
-            <div   class="ui divided selection list" *ngFor="let pagina of asien.value">
-              <a *ngFor="let elem of pagina|keys" class="item">
-                <div class="ui  horizontal label">{{elem.key}}</div>
-                {{elem.value}}
-              </a>
+
+      <div class="ui grid" *ngIf="datos.listAsientos">
+
+        <div class="five wide column">
+          <div class="ui secondary vertical menu">
+
+            <a  class="item" [ngClass]="{'active':selectedAsiento?.idImgAsiento==asientos.idImgAsiento}" *ngFor="let asientos of datos.listAsientos" (click)="selectAsiento(asientos)">{{asientos.idImgAsiento}}</a>
+
+          </div>
+
+        </div>
+        <div class="eleven wide column">
+          <div class="ui grid">
+            <div class="one column row">
+              <div class="column"><div class="large ui buttons">
+                <button class="ui button" *ngFor="let pagina of selectedAsiento?.listPag; first as isFirst" (click)="nextImage(pagina.pagina,pagina.nroPagRef,'imgAsientos')">{{pagina.pagina}}</button>
+
+              </div>
+              </div>
+              <div class="column">
+                <div class="ui cube shape " appShape id="imgAsientos">
+                  <div class="sides">
+                    <div class=" side" *ngFor="let pagina of selectedAsiento?.listPag; first as isFirst"  id="{{selectedAsiento.idImgAsiento+'_'+pagina.pagina}}" >
+                      <div class="content">
+                        <div class="center">
+                          <img [src]="imageToShowAsientos"
+                               alt="{{pagina.pagina}}"
+                               *ngIf="!isAsientoImageLoading" (click)="mostrarImagen($event)" >
+                          <div class="ui active dimmer" *ngIf="isAsientoImageLoading">
+                            <div class="ui loader"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-          </ng-container>
-        </a>
+          </div>
+
+
+
+
+        </div>
       </div>
+
+
     </div>
     <div class="ui basic modal" appModal>
       <!--<div class="ui icon header">-->

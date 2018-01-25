@@ -13,17 +13,6 @@
   </div>
 
   <div class="one column row">
-    <div class="column">
-
-      <!--mostrar resultado-->
-      <div class="ui divided selection list">
-        <a class="item" *ngFor="let dato of datos| keys">
-          <div class="ui  horizontal label">{{dato.key}}</div>
-         {{dato.value}}
-        </a>
-
-      </div>
-    </div>
     <div class="column" *ngIf="loadingData">
       <div class="ui floating icon floating  message">
         <i class="asterisk loading icon"></i>
@@ -35,6 +24,18 @@
         </div>
       </div>
     </div>
+    <div class="column">
+
+      <!--mostrar resultado-->
+      <div class="ui divided selection list">
+        <a class="item" *ngFor="let dato of datos| keys">
+          <div class="ui  horizontal label">{{dato.key}}</div>
+         {{dato.value}}
+        </a>
+
+      </div>
+    </div>
+
 
   </div>
 </div>

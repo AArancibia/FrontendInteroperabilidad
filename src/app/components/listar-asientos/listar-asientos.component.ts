@@ -17,15 +17,21 @@ export class ListarAsientosComponent implements OnInit {
   loadingDataSelect = false;
   isImageLoading = true;
   isFolioImageLoading=true;
+  isAsientoImageLoading=true;
 
   selectedFicha: any;
   selectedFolio: any;
+  selectedAsiento:any;
 
   vistaAsiento: VistaAsiento;
+
   imageToShowFichas: any;
   imageToShowFolio: any;
+  imageToShowAsientos: any;
+
   dataFichaAsiento: VistaAsiento;
   dataFolioAsiento: VistaAsiento;
+  dataAsiento:VistaAsiento;
   imgModal:any;
 
 
@@ -82,19 +88,25 @@ export class ListarAsientosComponent implements OnInit {
     console.log(this.asiento.oficina);
   }
 
-  nextImage(pagina:string,paginaRef:string){
-    this.dataFichaAsiento.pagina=pagina;
-    this.dataFichaAsiento.nroPagRef=paginaRef;
-    this.verAsiento(this.dataFichaAsiento,this.imageToShowFichas,this.isImageLoading);
+  nextImage(pagina:string,paginaRef:string,id:string){
+    let elemento = $("#"+id+".shape");
+    let shape = "" ;
 
-
-    let elemento = $("#imgFichas.shape");
-    console.log(elemento);
-    console.log($('#'+this.selectedFicha.idImgFicha+'_'+pagina) );
-
-    elemento
-      .shape('set next side',$('#'+this.selectedFicha.idImgFicha+'_'+pagina))
+    if(id === 'imgFichas'){
+      this.dataFichaAsiento.pagina=pagina;
+      this.dataFichaAsiento.nroPagRef=paginaRef;
+      this.verAsiento(this.dataFichaAsiento,"fichas");
+      shape = this.selectedFicha.idImgFicha;
+    }else if(id === 'imgAsientos'){
+      this.dataAsiento.pagina=pagina;
+      this.dataAsiento.nroPagRef=paginaRef;
+      this.verAsiento(this.dataAsiento,"asientos");
+      shape = this.selectedAsiento.idImgAsiento;
+    }
+        elemento
+      .shape('set next side',$('#'+shape+'_'+pagina))
       .shape('flip right');
+    console.log(shape,$('#'+shape+'_'+pagina));
       this.zone.runOutsideAngular(()=>{
 
       });
@@ -106,13 +118,16 @@ export class ListarAsientosComponent implements OnInit {
     this.dataFichaAsiento = new VistaAsiento();
     this.dataFichaAsiento.idImg = this.selectedFicha.idImgFicha;
     this.dataFichaAsiento.tipo = this.selectedFicha.tipo;
-    // pagina.nroPagRef = this.selectedFicha.nroPagRef;
-    // pagina.pagina = this.selectedFicha.pagina;
     this.dataFichaAsiento.nroTotalPag = this.datos.nroTotalPag;
     this.dataFichaAsiento.transaccion = this.datos.transaccion;
-
-
-
+  }
+  selectAsiento(ficha:any){
+    this.selectedAsiento=ficha;
+    this.dataAsiento = new VistaAsiento();
+    this.dataAsiento.idImg = this.selectedAsiento.idImgAsiento;
+    this.dataAsiento.tipo = this.selectedAsiento.tipo;
+    this.dataAsiento.nroTotalPag = this.datos.nroTotalPag;
+    this.dataAsiento.transaccion = this.datos.transaccion;
   }
 
   selectFolio(folio:any){
@@ -124,43 +139,51 @@ export class ListarAsientosComponent implements OnInit {
     this.dataFolioAsiento.pagina = this.selectedFolio.pagina;
     this.dataFolioAsiento.nroTotalPag = this.datos.nroTotalPag;
     this.dataFolioAsiento.transaccion = this.datos.transaccion;
-    this.verAsiento(this.dataFolioAsiento,this.imageToShowFolio,this.isFolioImageLoading);
+    this.verAsiento(this.dataFolioAsiento,"folios");
   }
 
+  verAsiento(vistaAsiento:VistaAsiento,tipo:string) {
+    // this.isFolioImageLoading = true;
 
+    this.switchTipo(tipo,true);
+      this.pide.getImgAsiento(vistaAsiento)
+        .then(res => {
+          // this.imageToShowFolio = res;
+          // this.isFolioImageLoading = false;
+          this.switchTipo(tipo,false,res);
 
-  createImageFromBlob(image: Blob,imageToShow) {
-    let reader = new FileReader();
-    reader.addEventListener("load", () => {
-      imageToShow = reader.result;
-    }, false);
+          console.log(this.isFolioImageLoading);
+        }, err => {
+          // this.isFolioImageLoading = false;
+          this.switchTipo(tipo,false);
+          this.logger.addLogMessage({tipo: "error", message: err});
+        });
 
-    if (image) {
-      reader.readAsDataURL(image);
+  }
+
+switchTipo(tipo:string,estado:boolean,img?:any){
+    switch (tipo){
+      case "folios":
+        this.isFolioImageLoading=estado;
+       if(img){
+         this.imageToShowFolio=img;
+       }
+        break;
+      case "fichas":
+        this.isImageLoading=estado;
+        if(img){
+          this.imageToShowFichas=img;
+        }
+        break;
+      case "asientos":
+        this.isAsientoImageLoading=estado;
+        if(img){
+          this.imageToShowAsientos=img;
+        }
+        break;
     }
-  }
-  verAsiento(vistaAsiento:VistaAsiento,imageToShow,imageLoading:boolean){
-    imageLoading=true;
-    // this.pide.getDataUrlWithinBody(this.vistaAsiento,'verasiento')
-    this.pide.getImgAsiento(vistaAsiento)
-      .then(res=>{
+}
 
-        // this.datos = res.json();
-        this.createImageFromBlob(res,imageToShow);
-        imageLoading = false;
-
-      },err=>{
-
-        imageLoading = false;
-        this.logger.addLogMessage({tipo:"error",message:err});
-
-      });
-    // this.pide.getData(this.vistaAsiento,"verAsiento").then(res=>{
-    //   this.datos = res.Body.verAsientoResponse;
-    // }, err=>{
-    //   this.logger.addLogMessage(err);
-    // })
-  }
 
   mostrarImagen(event){
     $('.ui.basic.modal')

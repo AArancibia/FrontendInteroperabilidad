@@ -89,7 +89,21 @@ export class PideService {
 
     return this.http.post(this.baseUrl+"verasiento",body,{ responseType: ResponseContentType.Blob })
       .toPromise()
-      .then((res) => res.blob()).catch(this.handleError);
+      .then((res) =>
+        this.createImageFromBlob(res.blob()).then(resultado=>resultado),error=>error).catch(this.handleError);
+  }
+  createImageFromBlob(image: Blob):Promise<any>{
+    let reader = new FileReader();
+    return new Promise((resolve,reject)=>{
+      reader.addEventListener("load", () => {
+        resolve(reader.result) ;
+      }, false);
+      if (image) {
+        reader.readAsDataURL(image);
+      }
+    });
+
+
   }
 
 

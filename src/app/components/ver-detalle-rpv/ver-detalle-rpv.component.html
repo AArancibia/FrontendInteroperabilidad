@@ -25,6 +25,17 @@
   </div>
 
   <div class="one column row">
+    <div class="column" *ngIf="loadingData">
+      <div class="ui floating icon floating  message">
+        <i class="asterisk loading icon"></i>
+        <div class="content">
+          <div class="header">
+            Cargando los datos ...
+          </div>
+          <p>Conectando con el servicio pide ... !Porfavor espere¡</p>
+        </div>
+      </div>
+    </div>
     <div class="column">
       <h1 class="ui header">Resultado</h1>
       <!--mostrar resultado-->
@@ -45,17 +56,7 @@
 
       </div>
     </div>
-    <div class="column" *ngIf="loadingData">
-      <div class="ui floating icon floating  message">
-        <i class="asterisk loading icon"></i>
-        <div class="content">
-          <div class="header">
-            Cargando los datos ...
-          </div>
-          <p>Conectando con el servicio pide ... !Porfavor espere¡</p>
-        </div>
-      </div>
-    </div>
+
 
   </div>
 </div>

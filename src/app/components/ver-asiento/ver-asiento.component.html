@@ -1,5 +1,16 @@
 <div class="ui grid">
   <div class="row one column">
+    <div class="column" *ngIf="loadingData">
+      <div class="ui floating icon floating  message">
+        <i class="asterisk loading icon"></i>
+        <div class="content">
+          <div class="header">
+            Cargando los datos ...
+          </div>
+          <p>Conectando con el servicio pide ... !Porfavor espere¡</p>
+        </div>
+      </div>
+    </div>
     <div class="column">
       <!--formulario de busqueda-->
       <form class="ui form" (ngSubmit)="verAsiento()">
@@ -44,17 +55,7 @@
            *ngIf="!isImageLoading">
       <!--<img *ngIf="datos" src="data:image/jpg;base64,{{datos}}" alt="">-->
     </div>
-    <div class="column" *ngIf="loadingData">
-      <div class="ui floating icon floating  message">
-        <i class="asterisk loading icon"></i>
-        <div class="content">
-          <div class="header">
-            Cargando los datos ...
-          </div>
-          <p>Conectando con el servicio pide ... !Porfavor espere¡</p>
-        </div>
-      </div>
-    </div>
+
 
   </div>
 </div>

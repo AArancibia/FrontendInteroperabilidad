@@ -1,5 +1,5 @@
 export class DetalleAsiento{
   zona:string;
-  oficna:string;
+  oficina:string;
   placa:string;
 }
