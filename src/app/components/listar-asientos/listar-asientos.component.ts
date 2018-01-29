@@ -15,9 +15,9 @@ export class ListarAsientosComponent implements OnInit {
   dataOficina: any;
   loadingData = false;
   loadingDataSelect = false;
-  isImageLoading = true;
-  isFolioImageLoading=true;
-  isAsientoImageLoading=true;
+  isImageLoading = false;
+  isFolioImageLoading=false;
+  isAsientoImageLoading=false;
 
   selectedFicha: any;
   selectedFolio: any;

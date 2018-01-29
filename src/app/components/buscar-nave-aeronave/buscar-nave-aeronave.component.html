@@ -24,9 +24,13 @@
         </div>
       </div>
     </div>
-    <div class="column">
+    <div class="column" *ngIf="datos">
 
       <!--mostrar resultado-->
+      <h4 class="ui horizontal divider header green">
+        <i class="list icon"></i>
+        Resultado
+      </h4>
       <div class="ui divided selection list">
         <a class="item" *ngFor="let dato of datos| keys">
           <div class="ui  horizontal label">{{dato.key}}</div>

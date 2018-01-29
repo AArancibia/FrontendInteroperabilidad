@@ -2,14 +2,13 @@
   <div class="row one column">
     <div class="column">
       <!--formulario de busqueda-->
-      <form class="ui form" (ngSubmit)="verDetalleAsiento()">
+      <form class="ui form" (ngSubmit)="verDetalleAsiento()" [ngClass]="{loading:!dataOficina}">
         <div class="field">
-          <label>Zona</label>
-          <input type="text" name="zona" placeholder="Zona"  [(ngModel)]="detalleAsiento.zona">
-        </div>
-        <div class="field">
-          <label>Oficina</label>
-          <input type="text" name="oficina" placeholder="Oficina" [(ngModel)]="detalleAsiento.oficina">
+        <label>Oficina</label>
+        <select name="" class="ui fluid search" (change)="selectOficina(oficina.value)" [ngClass]="{loading:!loadingDataSelect}" #oficina appDropdown>
+          <option value=""></option>
+          <option value="{{oficina.codOficina+'_'+oficina.codZona}}" *ngFor="let oficina of dataOficina">{{oficina.descripcion}}</option>
+        </select>
         </div>
         <div class="field">
           <label>Placa</label>
@@ -36,19 +35,21 @@
         </div>
       </div>
     </div>
-    <div class="column">
-      <h1 class="ui header">Resultado</h1>
+    <div class="column" *ngIf="!loadingData&&datos" >
+      <h4 class="ui horizontal divider header green">
+        <i class="list icon"></i>
+        Resultado
+      </h4>
       <!--mostrar resultado-->
       <div class="ui divided selection list">
         <a *ngFor="let vh of datos|keys" class="item">
           <div class="ui  horizontal label">{{vh.key}}</div>
-          {{vh.value}}
           <ng-container *ngIf="vh.key!='propietarios'">{{vh.value}}</ng-container>
           <ng-container *ngIf="vh.key=='propietarios'">
-            <div   class="ui divided selection list" *ngFor="let nombre of vh.value.nombre">
-              <a *ngFor="let elem of nombre|keys" class="item">
-                <div class="ui  horizontal label">{{elem.key}}</div>
-                {{elem.value}}
+            <div   class="ui divided selection list" >
+              <a  class="item" *ngFor="let nombre of vh.value.nombre; index as i">
+                <div class="ui  horizontal label">{{i + 1}}</div>
+                {{nombre}}
               </a>
             </div>
           </ng-container>

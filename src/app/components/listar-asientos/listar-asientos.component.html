@@ -1,12 +1,12 @@
 <div class="ui grid">
   <div class="row one column">
 
-      <div class="column">
-        <h1 class="header">LISTA DE ASIENTOS</h1>
-      </div>
+      <!--<div class="column">-->
+        <!--<h1 class="header">LISTA DE ASIENTOS</h1>-->
+      <!--</div>-->
     <div class="column">
       <!--formulario de busqueda-->
-      <form class="ui form" (ngSubmit)="buscarAsiento()">
+      <form class="ui form" (ngSubmit)="buscarAsiento()" [ngClass]="{loading:loadingDataSelect}">
         <!--<div class="field">-->
           <!--<label>Zona</label>-->
           <!--<input type="text" name="zona" placeholder="Zona" [(ngModel)]="asiento.zona">-->
@@ -21,8 +21,6 @@
             <option value=""></option>
             <option value="{{oficina.codOficina+'_'+oficina.codZona}}" *ngFor="let oficina of dataOficina">{{oficina.descripcion}}</option>
           </select>
-
-
         </div>
         <div class="field">
           <label>Partida</label>
@@ -60,8 +58,12 @@
         </div>
       </div>
     </div>
-    <div class="column">
-      <h1 class="ui header">Resultado</h1>
+
+    <div class="column" *ngIf="!loadingData&&datos.listFichas" >
+      <h4 class="ui horizontal divider header green">
+        <i class="list icon"></i>
+        Resultado
+      </h4>
       <!--mostrar resultado-->
       <div class="ui divided selection list">
         <a class="item">
@@ -74,6 +76,7 @@
         </a>
       </div>
       <h3 class="ui header">Fichas</h3>
+      <div class="ui clearing divider"></div>
       <div class="ui grid" *ngIf="datos.listFichas">
 
         <div class="five wide column">
@@ -86,29 +89,26 @@
         </div>
         <div class="eleven wide column">
           <div class="ui grid">
-            <div class="one column row">
-              <div class="column"><div class="large ui buttons">
+            <div class=" row">
+              <div class="column center aligned">
+                <div class="large ui buttons">
                 <button class="ui button" *ngFor="let pagina of selectedFicha?.listPag; first as isFirst" (click)="nextImage(pagina.pagina,pagina.nroPagRef,'imgFichas')">{{pagina.pagina}}</button>
 
               </div>
               </div>
-              <div class="column">
-                <div class="ui cube shape " appShape id="imgFichas">
-                  <div class="sides">
-                    <div class=" side" *ngFor="let pagina of selectedFicha?.listPag; first as isFirst"  id="{{selectedFicha.idImgFicha+'_'+pagina.pagina}}" >
-                      <div class="content">
-                        <div class="center">
-                          <img [src]="imageToShowFichas"
-                               alt="{{pagina.pagina}}"
-                               *ngIf="!isImageLoading" (click)="mostrarImagen($event)" >
-                          <div class="ui active dimmer" *ngIf="isImageLoading">
-                            <div class="ui loader"></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+            </div>
+              <div class=" two column centered row">
+              <div class="column "  >
+
+
+                  <div class="ui segment stacked"  [ngClass]="{loading:isImageLoading}" *ngIf="dataFichaAsiento?.pagina">
+                    <img class="ui medium rounded image" [src]="imageToShowFichas"
+                         alt=""
+                         *ngIf="!isImageLoading" (click)="mostrarImagen($event)">
+
+
                   </div>
-                </div>
+
               </div>
             </div>
           </div>
@@ -119,6 +119,7 @@
         </div>
       </div>
       <h3 class="ui header">Folios</h3>
+      <div class="ui clearing divider"></div>
       <div class="ui grid" *ngIf="datos.listFolios">
 
         <div class="five wide column">
@@ -131,24 +132,15 @@
         </div>
         <div class="eleven wide column">
           <div class="ui grid">
-            <div class="one column row">
+            <div class="two column centered row">
               <div class="column">
-                <div class="ui cube shape " appShape id="imgFolio" *ngIf="selectedFolio">
-                  <div class="sides">
-                    <div class=" active side"  id="{{selectedFolio.idImgFolio+'_'+selectedFolio.pagina}}" >
-                      <div class="content">
-                        <div class="center">
-                          <img [src]="imageToShowFolio"
-                               alt="{{selectedFolio.pagina}}"
-                               *ngIf="!isFolioImageLoading" (click)="mostrarImagen($event)" >
-                          <div class="ui active dimmer" *ngIf="isFolioImageLoading">
-                            <div class="ui loader"></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+
+                <div class="ui segment stacked"  [ngClass]="{loading:isFolioImageLoading}" *ngIf="dataFolioAsiento?.pagina">
+                  <img class="ui medium rounded image" [src]="imageToShowFolio"
+                       alt=""
+                       *ngIf="!isFolioImageLoading" (click)="mostrarImagen($event)">
                 </div>
+
               </div>
             </div>
           </div>
@@ -160,7 +152,7 @@
       </div>
 
       <h3 class="ui header">Asientos</h3>
-
+      <div class="ui clearing divider"></div>
       <div class="ui grid" *ngIf="datos.listAsientos">
 
         <div class="five wide column">
@@ -173,29 +165,39 @@
         </div>
         <div class="eleven wide column">
           <div class="ui grid">
-            <div class="one column row">
+            <div class="center aligned row">
               <div class="column"><div class="large ui buttons">
                 <button class="ui button" *ngFor="let pagina of selectedAsiento?.listPag; first as isFirst" (click)="nextImage(pagina.pagina,pagina.nroPagRef,'imgAsientos')">{{pagina.pagina}}</button>
 
               </div>
               </div>
+            </div>
+              <div class="two column centered row">
               <div class="column">
-                <div class="ui cube shape " appShape id="imgAsientos">
-                  <div class="sides">
-                    <div class=" side" *ngFor="let pagina of selectedAsiento?.listPag; first as isFirst"  id="{{selectedAsiento.idImgAsiento+'_'+pagina.pagina}}" >
-                      <div class="content">
-                        <div class="center">
-                          <img [src]="imageToShowAsientos"
-                               alt="{{pagina.pagina}}"
-                               *ngIf="!isAsientoImageLoading" (click)="mostrarImagen($event)" >
-                          <div class="ui active dimmer" *ngIf="isAsientoImageLoading">
-                            <div class="ui loader"></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+
+                <div class="ui segment stacked"  [ngClass]="{loading:isAsientoImageLoading}" *ngIf="dataAsiento?.pagina">
+                  <img class="ui medium rounded image" [src]="imageToShowAsientos"
+                       alt=""
+                       *ngIf="!isAsientoImageLoading" (click)="mostrarImagen($event)">
                 </div>
+
+
+                <!--<div class="ui cube shape " appShape id="imgAsientos">-->
+                  <!--<div class="sides">-->
+                    <!--<div class=" side" *ngFor="let pagina of selectedAsiento?.listPag; first as isFirst"  id="{{selectedAsiento.idImgAsiento+'_'+pagina.pagina}}" >-->
+                      <!--<div class="content">-->
+                        <!--<div class="center">-->
+                          <!--<img [src]="imageToShowAsientos"-->
+                               <!--alt="{{pagina.pagina}}"-->
+                               <!--*ngIf="!isAsientoImageLoading" (click)="mostrarImagen($event)" >-->
+                          <!--<div class="ui active dimmer" *ngIf="isAsientoImageLoading">-->
+                            <!--<div class="ui loader"></div>-->
+                          <!--</div>-->
+                        <!--</div>-->
+                      <!--</div>-->
+                    <!--</div>-->
+                  <!--</div>-->
+                <!--</div>-->
               </div>
             </div>
           </div>
