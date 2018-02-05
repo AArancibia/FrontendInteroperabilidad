@@ -89,10 +89,27 @@
           <td>10 hours ago</td>
         </tr>
 
-        <tr  >
+        <tr class="detail-row" >
           <td colspan="100%">
-            <div @flyInOut style="background: red;"  *ngIf="currentindex==3">
-              <h4 class="ui header">tomalo mela</h4>
+            <div @flyInOut class="detalle"  *ngIf="currentindex==3">
+              <div class="ui divided selection list">
+                <a class="item">
+                  <div class="ui red horizontal label">Fruit</div>
+                  Kumquats
+                </a>
+                <a class="item">
+                  <div class="ui purple horizontal label">Candy</div>
+                  Ice Cream
+                </a>
+                <a class="item">
+                  <div class="ui red horizontal label">Fruit</div>
+                  Orange
+                </a>
+                <a class="item">
+                  <div class="ui horizontal label">Dog</div>
+                  Poodle
+                </a>
+              </div>
             </div>
           </td>
 

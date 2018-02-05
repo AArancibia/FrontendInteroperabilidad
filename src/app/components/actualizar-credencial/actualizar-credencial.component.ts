@@ -54,11 +54,11 @@ import {animate, state, style, transition, trigger} from '@angular/animations'
     trigger('flyInOut', [
       state('in', style({transform: 'translateX(0)'})),
       transition('void => *', [
-        style({height: '100px'}),
-        animate(5000)
+        style({height: 0}),
+        animate(250)
       ]),
       transition('* => void', [
-        animate(5000, style({height: '0px'}))
+        animate(250, style({height: 0}))
       ])
     ])
   ]

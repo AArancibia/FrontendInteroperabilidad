@@ -48,23 +48,80 @@
         </div>
       </div>
     </div>
+
+
     <div class="column" *ngIf="!loadingData&&datos">
       <h4 class="ui horizontal divider header green">
         <i class="list icon"></i>
         Resultado
       </h4>
       <!--mostrar resultado-->
-      <div *ngFor="let titu of datos;index as i" class="ui divided selection list">
-        <a class="item" >
-          <div class="ui blue horizontal label"># RESULTADO</div>
-          {{i+1}}
-        </a>
-        <a class="item" *ngFor="let elementos of titu | keys">
-          <div class="ui  horizontal label">{{elementos.key}}</div>
-          {{elementos.value}}
-        </a>
 
-      </div>
+      <table class="ui table ">
+        <thead>
+        <tr>
+          <th>#</th>
+          <th>Registro</th>
+          <th>Libro</th>
+          <th>R. Social</th>
+        </tr>
+        </thead>
+        <tbody>
+        <ng-container *ngFor="let titu of datos;index as i">
+          <tr *ngIf="i>=min&&i<=max" (click)="selectRow(i+1)">
+            <td>{{i+1}}</td>
+            <td>{{titu.registro}}</td>
+            <td>{{titu.libro}}</td>
+            <td>{{titu.razonSocial}}</td>
+          </tr>
+
+          <tr *ngIf="i>=min&&i<=max" class="detail-row">
+            <td colspan="100%">
+              <div class="detalle" @showDetail   *ngIf="selectedRow==(i+1)">
+                <div class="ui divided selection list">
+                  <ng-container  *ngFor="let elementos of titu | keys">
+                    <a class="item" *ngIf="elementos.key!='registro'&&elementos.key!='libro'&&elementos.key!='razonSocial'">
+                      <div class="ui  horizontal label">{{elementos.key}}</div>
+                      {{elementos.value}}
+                    </a>
+                  </ng-container>
+
+                </div>
+              </div>
+            </td>
+          </tr>
+        </ng-container>
+        </tbody>
+        <tfoot>
+        <tr><th colspan="100%">
+          <div class="ui right floated pagination menu">
+            <a class="icon item" (click)="prevPagina()">
+              <i class="left chevron icon"></i>
+            </a>
+            <a class="item" *ngFor="let rango of paginas; index as i" (click)="setPaginaActual(i+1)">{{i+1}}</a>
+
+            <a class="icon item" (click)="nextPagina()">
+              <i class="right chevron icon"></i>
+            </a>
+          </div>
+        </th>
+        </tr></tfoot>
+      </table>
+
+
+
+      <!--<div *ngFor="let titu of datos;index as i" class="ui divided selection list">-->
+        <!--<a class="item" >-->
+          <!--<div class="ui blue horizontal label"># RESULTADO</div>-->
+          <!--{{i+1}}-->
+        <!--</a>-->
+        <!--<a class="item" *ngFor="let elementos of titu | keys">-->
+          <!--<div class="ui  horizontal label">{{elementos.key}}</div>-->
+          <!--{{elementos.value}}-->
+        <!--</a>-->
+      <!--</div>-->
+
+
     </div>
 
 
