@@ -23,6 +23,7 @@ import { ActualizarCredencialComponent } from './components/actualizar-credencia
 import { ShapePipe } from './pipes/shape.pipe';
 import { ShapeDirective } from './directives/shape.directive';
 import { ModalDirective } from './directives/modal.directive';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 
 @NgModule({
@@ -47,6 +48,7 @@ import { ModalDirective } from './directives/modal.directive';
     FormsModule,
     NgxSoapModule,
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule
   ],
   providers: [

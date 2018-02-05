@@ -54,6 +54,58 @@
         </a>
 
       </div>
+
+      <button class="ui button" [@heroState]="state" (click)="toggleState()">Follow</button>
+      <table class="ui table">
+        <tbody>
+        <tr>
+          <td class="collapsing">
+            <i class="folder icon"></i> node_modules
+          </td>
+          <td>Initial commit</td>
+          <td>10 hours ago</td>
+        </tr>
+        <tr (click)="mostrardetalle(2)">
+          <td>
+            <i class="folder icon"></i> test
+          </td>
+          <td>Initial commit</td>
+          <td>10 hours ago</td>
+        </tr>
+        <tr @shrinkOut *ngIf="currentindex==2" >
+          <td >
+            <i class="folder icon"></i> build
+          </td>
+          <td >Initial commit</td>
+          <td >10 hours ago</td>
+        </tr>
+
+        <tr (click)="mostrardetalle(3)">
+
+          <td>
+            <i class="folder icon"></i> test
+          </td>
+          <td>Initial commit</td>
+          <td>10 hours ago</td>
+        </tr>
+
+        <tr  >
+          <td colspan="100%">
+            <div @flyInOut style="background: red;"  *ngIf="currentindex==3">
+              <h4 class="ui header">tomalo mela</h4>
+            </div>
+          </td>
+
+          <!--<td >-->
+            <!--<i class="folder icon"></i> build-->
+          <!--</td>-->
+          <!--<td >Initial commit</td>-->
+          <!--<td >10 hours ago</td>-->
+
+        </tr>
+        </tbody>
+      </table>
+
     </div>
 
 
