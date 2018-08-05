@@ -3,25 +3,36 @@
     <div class="column">
       <!--formulario de busqueda-->
       <form class="ui form" (ngSubmit)="consultar()">
+        <div class="field">
+          <label> Datos Usuario</label>
+          <div class="three fields">
+            <div class="field" >
+              <label><sub>DNI</sub> </label>
+              <input type="text" name="nuDniUsuario" placeholder="DNI usuario" [(ngModel)]="usuario.nuDniUsuario">
+            </div>
+            <div class="field">
+              <label><sub>Clave usuario</sub></label>
+              <input type="password" name="password" placeholder="Clave usuario" [(ngModel)]="usuario.password">
+            </div>
+            <div class="field disabled" >
+              <label><sub>RUC</sub></label>
+              <!--<label >20187346488</label>-->
+              <input type="text" name="nuRucUsuario" placeholder="RUC entidad" [(ngModel)]="usuario.nuRucUsuario">
+            </div>
 
-        <div class="field" >
+          </div>
+        </div>
+        <div class="field">
           <label>DNI a consultar</label>
-          <input type="text" name="nuDniConsulta" placeholder="DNI a consultar" [(ngModel)]="usuario.nuDniConsulta">
+          <div class="fields">
+            <div class="thirteen wide field">
+              <input type="text" name="nuDniConsulta" placeholder="DNI a consultar" [(ngModel)]="usuario.nuDniConsulta">
+            </div>
+            <div class="three wide field">
+              <button class="ui button fluid" type="submit">Buscar</button>
+            </div>
+          </div>
         </div>
-        <div class="field" >
-          <label>DNI usuario</label>
-          <input type="text" name="nuDniUsuario" placeholder="DNI usuario" [(ngModel)]="usuario.nuDniUsuario">
-        </div>
-        <div class="field" >
-          <label>RUC entidad</label>
-          <input type="text" name="nuDniUsuario" placeholder="RUC entidad" [(ngModel)]="usuario.nuDniUsuario">
-        </div>
-        <div class="field" >
-          <label>Clave usuario</label>
-          <input type="password" name="password" placeholder="Clave usuario" [(ngModel)]="usuario.password">
-        </div>
-
-        <button class="ui button" type="submit">Buscar</button>
       </form>
 
 
@@ -40,23 +51,39 @@
         </div>
       </div>
     </div>
-    <div class="column">
-      <h1 class="ui header">Resultado</h1>
+    <div class="column" *ngIf="datos&&!loadingData">
+      <div class="ui divider clearing"></div>
       <!--mostrar resultado-->
-      <div *ngFor="let titu of datos;index as i" class="ui divided selection list">
-        <a class="item" >
-          <div class="ui blue horizontal label"># RESULTADO</div>
-          {{i+1}}
-        </a>
-        <a class="item" *ngFor="let elementos of titu | keys">
-          <div class="ui  horizontal label">{{elementos.key}}</div>
-          {{elementos.value}}
-        </a>
+      <div class="ui grid">
+        <div class="row ">
+          <div class="ten wide column">
+            <div  class="ui divided  list">
+              <div class="item"><div class="ui  horizontal label" >Apellido Paterno</div> {{datos.apPrimer}}</div>
+              <div  class="item"><div class="ui  horizontal label" >Apellido Materno</div> {{datos.apSegundo}}</div>
+              <div  class="item"><div class="ui  horizontal label" >Nombre(s)</div> {{datos.prenombres}}</div>
+              <div  class="item"><div class="ui  horizontal label" >Estado Civil</div> {{datos.estadoCivil}}</div>
+              <div  class="item"><div class="ui  horizontal label" >Restriccion</div> {{datos.restriccion}}</div>
+              <div  class="item"><div class="ui  horizontal label" >Dirección</div> {{datos.direccion}}</div>
+              <div  class="item"><div class="ui  horizontal label" >Ubigeo</div> {{datos.ubigeo}}</div>
+            </div>
+          </div>
+          <div class="six wide column">
+            <img class="ui fluid image rounded bordered" [src]="'data:image/png;base64,'+datos.foto" alt="foto persona">
+          </div>
+        </div>
+        <div class="one row column">
+          <div class="column">
+            <div  class="ui divided  list">
+              <!--<div  class="item"><div class="ui  horizontal label" >Dirección</div> {{datos.direccion}}</div>-->
+              <!--<div  class="item"><div class="ui  horizontal label" >Ubigeo</div> {{datos.ubigeo}}</div>-->
 
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
 
+
+    </div>
 
   </div>
 </div>
-

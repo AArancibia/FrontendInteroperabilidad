@@ -38,6 +38,6 @@ export class AppComponent implements OnInit{
       this.log.push(dato)
     setTimeout(()=>{
       this.log.shift();
-    },5000)
+    },10000)
   }
 }

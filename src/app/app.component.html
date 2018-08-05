@@ -47,9 +47,15 @@
             </a>
           </div>
 
-          <div *ngFor="let el of log; index as i" class="ui red message" [class.red]="el.tipo=='error'" [class.green]="el.tipo=='success'">
+          <div *ngFor="let el of log; index as i" class="ui  message logs"
+               [class.red]="el.tipo=='error'"
+               [class.green]="el.tipo=='success'"
+               [class.orange]="el.tipo=='warning'"
+          >
             {{el.message}}
           </div>
+
+          <!--<div class="ui message logs">texto de prueba para manejar los estilos</div>-->
         </div>
 
 

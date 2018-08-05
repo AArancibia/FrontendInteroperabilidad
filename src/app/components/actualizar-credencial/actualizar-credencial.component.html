@@ -2,128 +2,136 @@
   <div class="row one column">
     <div class="column">
       <!--formulario de busqueda-->
-      <form class="ui form" (ngSubmit)="actualizar()">
+      <form class="ui form" ngForm="formActualizarPass" (ngSubmit)="actualizar()" #formActualizarPass>
 
-        <div class="field" >
-          <label>Clave anterior</label>
+        <div class="two fields">
+          <div class="field required" >
+            <label>DNI usuario</label>
+            <input type="text" name="nuDni" placeholder="DNI" [(ngModel)]="userCredencial.nuDni">
+          </div>
+          <div class="field disabled" >
+            <label>RUC entidad</label>
+            <input type="text" name="nuRUC" placeholder="RUC" [(ngModel)]="userCredencial.nuRUC">
+          </div>
+        </div>
+        <div class="field required" >
+          <label>Contraseña anterior</label>
           <input type="password" name="credencialAnterior" placeholder="Credencial Anterior" [(ngModel)]="userCredencial.credencialAnterior">
         </div>
-        <div class="field" >
-          <label>Nueva Clave</label>
+        <div class="field required" >
+          <label>Nueva Contraseña</label>
           <input type="password" name="credencialNueva" placeholder="Credencial Nueva" [(ngModel)]="userCredencial.credencialNueva">
         </div>
-        <div class="field" >
-          <label>DNI usuario</label>
-          <input type="text" name="nuDni" placeholder="DNI" [(ngModel)]="userCredencial.nuDni">
-        </div>
-        <div class="field" >
-          <label>RUC entidad</label>
-          <input type="text" name="nuRUC" placeholder="RUC" [(ngModel)]="userCredencial.nuRUC">
+        <div class="field">
+          <button class="ui button fluid" type="submit">Cambiar Contraseña</button>
         </div>
 
-        <button class="ui button" type="submit">Buscar</button>
       </form>
-
-
     </div>
-    <div class="column">
-      <div class="ui floating icon floating  message">
-        <i class="asterisk loading icon"></i>
-        <div class="content">
-          <div class="header">
-            Cargando los datos ...
-          </div>
-          <p>Conectando con el servicio pide ... !Porfavor espere¡</p>
-        </div>
-      </div>
-    </div>
+
+  </div>
+  <div class="one column row">
+
   </div>
 
   <div class="one column row">
-    <div class="column">
-      <h1 class="ui header">Resultado</h1>
-      <!--mostrar resultado-->
-      <div *ngFor="let titu of datos;index as i" class="ui divided selection list">
-        <a class="item" >
-          <div class="ui blue horizontal label"># RESULTADO</div>
-          {{i+1}}
-        </a>
-        <a class="item" *ngFor="let elementos of titu | keys">
-          <div class="ui  horizontal label">{{elementos.key}}</div>
-          {{elementos.value}}
-        </a>
-
-      </div>
-
-      <button class="ui button" [@heroState]="state" (click)="toggleState()">Follow</button>
-      <table class="ui table">
-        <tbody>
-        <tr>
-          <td class="collapsing">
-            <i class="folder icon"></i> node_modules
-          </td>
-          <td>Initial commit</td>
-          <td>10 hours ago</td>
-        </tr>
-        <tr (click)="mostrardetalle(2)">
-          <td>
-            <i class="folder icon"></i> test
-          </td>
-          <td>Initial commit</td>
-          <td>10 hours ago</td>
-        </tr>
-        <tr @shrinkOut *ngIf="currentindex==2" >
-          <td >
-            <i class="folder icon"></i> build
-          </td>
-          <td >Initial commit</td>
-          <td >10 hours ago</td>
-        </tr>
-
-        <tr (click)="mostrardetalle(3)">
-
-          <td>
-            <i class="folder icon"></i> test
-          </td>
-          <td>Initial commit</td>
-          <td>10 hours ago</td>
-        </tr>
-
-        <tr class="detail-row" >
-          <td colspan="100%">
-            <div @flyInOut class="detalle"  *ngIf="currentindex==3">
-              <div class="ui divided selection list">
-                <a class="item">
-                  <div class="ui red horizontal label">Fruit</div>
-                  Kumquats
-                </a>
-                <a class="item">
-                  <div class="ui purple horizontal label">Candy</div>
-                  Ice Cream
-                </a>
-                <a class="item">
-                  <div class="ui red horizontal label">Fruit</div>
-                  Orange
-                </a>
-                <a class="item">
-                  <div class="ui horizontal label">Dog</div>
-                  Poodle
-                </a>
-              </div>
+    <ng-container *ngIf="loadingData">
+      <div class="column" >
+        <div class="ui floating icon  message">
+          <i class="asterisk loading icon"></i>
+          <div class="content">
+            <div class="header">
+              Cargando los datos ...
             </div>
-          </td>
+            <p>Conectando con el servicio pide ... !Porfavor espere¡</p>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    <!--<div class="column" >-->
+      <!--<div class="ui divider clearing"></div>-->
+      <!--&lt;!&ndash;mostrar resultado&ndash;&gt;-->
+      <!--<div *ngFor="let titu of datos;index as i" class="ui divided selection list">-->
+        <!--<a class="item" >-->
+          <!--<div class="ui blue horizontal label"># RESULTADO</div>-->
+          <!--{{i+1}}-->
+        <!--</a>-->
+        <!--<a class="item" *ngFor="let elementos of titu | keys">-->
+          <!--<div class="ui  horizontal label">{{elementos.key}}</div>-->
+          <!--{{elementos.value}}-->
+        <!--</a>-->
 
+      <!--</div>-->
+
+      <!--<button class="ui button" [@heroState]="state" (click)="toggleState()">Follow</button>-->
+      <!--<table class="ui table">-->
+        <!--<tbody>-->
+        <!--<tr>-->
+          <!--<td class="collapsing">-->
+            <!--<i class="folder icon"></i> node_modules-->
+          <!--</td>-->
+          <!--<td>Initial commit</td>-->
+          <!--<td>10 hours ago</td>-->
+        <!--</tr>-->
+        <!--<tr (click)="mostrardetalle(2)">-->
+          <!--<td>-->
+            <!--<i class="folder icon"></i> test-->
+          <!--</td>-->
+          <!--<td>Initial commit</td>-->
+          <!--<td>10 hours ago</td>-->
+        <!--</tr>-->
+        <!--<tr @shrinkOut *ngIf="currentindex==2" >-->
           <!--<td >-->
             <!--<i class="folder icon"></i> build-->
           <!--</td>-->
           <!--<td >Initial commit</td>-->
           <!--<td >10 hours ago</td>-->
+        <!--</tr>-->
 
-        </tr>
-        </tbody>
-      </table>
+        <!--<tr (click)="mostrardetalle(3)">-->
 
-    </div>
+          <!--<td>-->
+            <!--<i class="folder icon"></i> test-->
+          <!--</td>-->
+          <!--<td>Initial commit</td>-->
+          <!--<td>10 hours ago</td>-->
+        <!--</tr>-->
+
+        <!--<tr class="detail-row" >-->
+          <!--<td colspan="100%">-->
+            <!--<div @flyInOut class="detalle"  *ngIf="currentindex==3">-->
+              <!--<div class="ui divided selection list">-->
+                <!--<a class="item">-->
+                  <!--<div class="ui red horizontal label">Fruit</div>-->
+                  <!--Kumquats-->
+                <!--</a>-->
+                <!--<a class="item">-->
+                  <!--<div class="ui purple horizontal label">Candy</div>-->
+                  <!--Ice Cream-->
+                <!--</a>-->
+                <!--<a class="item">-->
+                  <!--<div class="ui red horizontal label">Fruit</div>-->
+                  <!--Orange-->
+                <!--</a>-->
+                <!--<a class="item">-->
+                  <!--<div class="ui horizontal label">Dog</div>-->
+                  <!--Poodle-->
+                <!--</a>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</td>-->
+
+          <!--&lt;!&ndash;<td >&ndash;&gt;-->
+            <!--&lt;!&ndash;<i class="folder icon"></i> build&ndash;&gt;-->
+          <!--&lt;!&ndash;</td>&ndash;&gt;-->
+          <!--&lt;!&ndash;<td >Initial commit</td>&ndash;&gt;-->
+          <!--&lt;!&ndash;<td >10 hours ago</td>&ndash;&gt;-->
+
+        <!--</tr>-->
+        <!--</tbody>-->
+      <!--</table>-->
+
+    <!--</div>-->
 
 
   </div>

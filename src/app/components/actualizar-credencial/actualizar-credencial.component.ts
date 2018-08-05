@@ -68,9 +68,11 @@ export class ActualizarCredencialComponent implements OnInit {
  datos:any;
  state = 'inactive';
  currentindex = 0;
+  loadingData:boolean=false;
 
   constructor(private pide:PideService, private logger: ComunicatorService) {
     this.userCredencial = new UserCredencial;
+    this.userCredencial.nuRUC = "20187346488";
   }
 
   ngOnInit() {
@@ -78,11 +80,29 @@ export class ActualizarCredencialComponent implements OnInit {
 
 
   actualizar(){
-    this.pide.getDataUrlWithinBody(this.userCredencial,'buscardni').then(res=>{
+    this.loadingData=true;
+    this.pide.getDataUrlWithinBody(this.userCredencial,'actucred').then(res=>{
       this.datos = res.json();
       console.log(this.datos);
+      this.loadingData=false;
+      let tipo = "";
+      switch (res.json().coResultado){
+        case "0000":
+          tipo = "success";
+          break;
+        case "1001":
+          tipo = "error";
+          break;
+        case "1000":
+          tipo = "warning";
+          break;
+      }
+
+      this.logger.addLogMessage({tipo,message:res.json().deResultado});
+
     },err=>{
       this.logger.addLogMessage({tipo:"error",message:err});
+      this.loadingData=false;
     });
   }
 
