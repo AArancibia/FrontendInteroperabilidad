@@ -12,21 +12,22 @@ import {VerAsientoComponent} from "./components/ver-asiento/ver-asiento.componen
 import {VerDetalleRpvComponent} from "./components/ver-detalle-rpv/ver-detalle-rpv.component";
 import {ConsultarDniComponent} from "./components/consultar-dni/consultar-dni.component";
 import {ActualizarCredencialComponent} from "./components/actualizar-credencial/actualizar-credencial.component";
+import {AuthGuardService} from "./services/auth-guard.service";
 
 
 const routes: Routes = [
-  {path: 'buscarNaveAeronave', component: BuscarNaveAeronaveComponent},
-  {path: 'buscarPjrazonSocial', component: BuscarPJRazonSocialComponent},
-  {path: 'buscarTitularidad', component: BuscarTituralidadComponent},
-  {path: 'listarAsientos', component: ListarAsientosComponent},
-  {path: 'obtenerOficinas', component: ObtenerOficinasComponent},
-  {path: 'verAsiento', component: VerAsientoComponent},
-  {path: 'verDetalleRpv', component: VerDetalleRpvComponent},
-  {path: 'consultar', component: ConsultarDniComponent},
-  {path: 'actualizarCredencial', component: ActualizarCredencialComponent},
+  {path: 'buscarNaveAeronave', component: BuscarNaveAeronaveComponent, canActivate:[AuthGuardService]},
+  {path: 'buscarPjrazonSocial', component: BuscarPJRazonSocialComponent, canActivate:[AuthGuardService]},
+  {path: 'buscarTitularidad', component: BuscarTituralidadComponent, canActivate:[AuthGuardService]},
+  {path: 'listarAsientos', component: ListarAsientosComponent, canActivate:[AuthGuardService]},
+  {path: 'obtenerOficinas', component: ObtenerOficinasComponent, canActivate:[AuthGuardService]},
+  {path: 'verAsiento', component: VerAsientoComponent, canActivate:[AuthGuardService]},
+  {path: 'verDetalleRpv', component: VerDetalleRpvComponent, canActivate:[AuthGuardService]},
+  {path: 'consultar', component: ConsultarDniComponent, canActivate:[AuthGuardService]},
+  {path: 'actualizarCredencial', component: ActualizarCredencialComponent, canActivate:[AuthGuardService]},
   // {path: '', redirectTo: '/login', pathMatch: 'full'},
-  {path: '', redirectTo: '/buscarNaveAeronave', pathMatch: 'full'},
-  {path: '**', redirectTo: '/buscarNaveAeronave', pathMatch: 'full'}
+  {path: '', redirectTo: 'buscarNaveAeronave', pathMatch: 'full'},
+  {path: '**', redirectTo: 'buscarNaveAeronave', pathMatch: 'full'}
 
 ];
 

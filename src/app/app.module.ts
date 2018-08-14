@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {InjectionToken, NgModule} from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { BuscarNaveAeronaveComponent } from './components/buscar-nave-aeronave/buscar-nave-aeronave.component';
@@ -24,6 +24,9 @@ import { ShapePipe } from './pipes/shape.pipe';
 import { ShapeDirective } from './directives/shape.directive';
 import { ModalDirective } from './directives/modal.directive';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {AuthService} from "./services/auth.service";
+import {AuthGuardService} from "./services/auth-guard.service";
+import {JWT_OPTIONS, JwtHelperService, JwtModule} from "@auth0/angular-jwt";
 
 
 @NgModule({
@@ -53,6 +56,8 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
   ],
   providers: [
     PideService,
+    AuthService,
+    AuthGuardService,
     BuscarTitularidadService,
     BuscarNaveAeronaveService,
     ComunicatorService
