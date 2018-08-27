@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import {InjectionToken, NgModule} from '@angular/core';
+import { NgModule} from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { BuscarNaveAeronaveComponent } from './components/buscar-nave-aeronave/buscar-nave-aeronave.component';
@@ -10,11 +10,11 @@ import { ObtenerOficinasComponent } from './components/obtener-oficinas/obtener-
 import { ListarAsientosComponent } from './components/listar-asientos/listar-asientos.component';
 import { VerAsientoComponent } from './components/ver-asiento/ver-asiento.component';
 import { VerDetalleRpvComponent } from './components/ver-detalle-rpv/ver-detalle-rpv.component';
-import {NgxSoapModule} from "ngx-soap";
-import {BuscarNaveAeronaveService} from "./services/buscar-nave-aeronave.service";
+// import {NgxSoapModule} from "ngx-soap";
+// import {BuscarNaveAeronaveService} from "./services/buscar-nave-aeronave.service";
 import { KeysPipe } from './pipes/keys.pipe';
 import {FormsModule} from "@angular/forms";
-import {BuscarTitularidadService} from "./services/buscar-titularidad.service";
+// import {BuscarTitularidadService} from "./services/buscar-titularidad.service";
 import { DropdownDirective } from './directives/dropdown.directive';
 import {PideService} from "./services/pide.service";
 import {ComunicatorService} from "./services/comunicator.service";
@@ -26,7 +26,8 @@ import { ModalDirective } from './directives/modal.directive';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {AuthService} from "./services/auth.service";
 import {AuthGuardService} from "./services/auth-guard.service";
-import {JWT_OPTIONS, JwtHelperService, JwtModule} from "@auth0/angular-jwt";
+// import {JWT_OPTIONS, JwtHelperService, JwtModule} from "@auth0/angular-jwt";
+import {HttpModule} from "@angular/http";
 
 
 @NgModule({
@@ -49,8 +50,9 @@ import {JWT_OPTIONS, JwtHelperService, JwtModule} from "@auth0/angular-jwt";
   ],
   imports: [
     FormsModule,
-    NgxSoapModule,
+    // NgxSoapModule,
     BrowserModule,
+    HttpModule,
     BrowserAnimationsModule,
     AppRoutingModule
   ],
@@ -58,8 +60,6 @@ import {JWT_OPTIONS, JwtHelperService, JwtModule} from "@auth0/angular-jwt";
     PideService,
     AuthService,
     AuthGuardService,
-    BuscarTitularidadService,
-    BuscarNaveAeronaveService,
     ComunicatorService
   ],
   bootstrap: [AppComponent]

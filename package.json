@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --port 5050",
+    "start": "ng serve --port 5000",
     "build": "ng build",
     "build-on-tdie": "ng build --env=prod ",
     "test": "ng test",

@@ -1,20 +1,24 @@
 import { Injectable } from '@angular/core';
-import {Client, SOAPService} from "ngx-soap";
-import {Http, ResponseContentType} from "@angular/http";
+import {Headers, Http, ResponseContentType} from "@angular/http";
 import {PlatformLocation} from "@angular/common";
 
 @Injectable()
 export class PideService {
   // baseUrl =  '';
   // baseUrl =  'http://167.250.206.164:5050/platpide/';
-  baseUrl =  'http://192.168.10.6:5050/platpide/';
+  baseUrl =  'http://app.munives.gob.pe/backend/platpide/';
+  // baseUrl =  'http://192.168.10.6:5050/platpide/';
+  protected  token: any;
+ protected headers: Headers;
 
 
 
 
-
-  constructor(private http: Http,private soap: SOAPService, platformLocation:PlatformLocation) {
+  constructor(private http: Http, platformLocation:PlatformLocation) {
     console.log((platformLocation as any).location)
+    this.token = JSON.parse(localStorage.getItem('token'));
+    this.headers = new Headers();
+    this.headers.set("Authorization","Bearer "+this.token.access_token)
   }
 
   // getWsdl() {
@@ -75,14 +79,14 @@ export class PideService {
 
   getDataUrlWithoutBody(id:string,name:string){
     const url = this.baseUrl+name+'/'+id;
-    return this.http.post(url,{})
+    return this.http.post(url,{},{headers: this.headers})
       .toPromise()
       .then(response => response).catch(this.handleError);
   }
 
   getDataUrlWithinBody(body:any,name:string){
 
-    return this.http.post(this.baseUrl+name,body)
+    return this.http.post(this.baseUrl+name,body,{headers: this.headers})
       .toPromise()
       .then(response => response).catch(this.handleError);
   }

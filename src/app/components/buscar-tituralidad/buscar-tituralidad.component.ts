@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Titular} from "../../entities/titular";
-import {BuscarTitularidadService} from "../../services/buscar-titularidad.service";
+// import {BuscarTitularidadService} from "../../services/buscar-titularidad.service";
 import {PideService} from "../../services/pide.service";
 import {ComunicatorService} from "../../services/comunicator.service";
 import {animate, state, style, transition, trigger} from "@angular/animations";

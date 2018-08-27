@@ -68,7 +68,7 @@ export class ActualizarCredencialComponent implements OnInit {
  datos:any;
  state = 'inactive';
  currentindex = 0;
-  loadingData:boolean=false;
+  loadingData: boolean=false;
 
   constructor(private pide:PideService, private logger: ComunicatorService) {
     this.userCredencial = new UserCredencial;

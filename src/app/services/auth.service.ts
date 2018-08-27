@@ -4,7 +4,7 @@ import {Http, Headers, RequestOptions} from "@angular/http";
 
 @Injectable()
 export class AuthService {
-  baseUrl =  'http://localhost:8000/mockbin/oauth2/token';
+  baseUrl =  'http://app.munives.gob.pe/backend/platpide/oauth2/token';
 
   constructor(private http: Http) { }
 
@@ -39,10 +39,10 @@ export class AuthService {
     // options.headers.append("x-forwarded-proto","https");
     const data = {
       grant_type:"authorization_code",
-      client_id: "HR3r64MXyCjRuAGXNuKNUcHkBTj9hQyh",
-      client_secret: "Zktqdsf2ak5htK1EPBmKgBLsU9p1MKQz",
-      scope: "read",
-      provision_key: "gGjiykLSCGGDWTPL6LodqYNEXk4egqiN",
+      client_id: "sQPVj2hph09KYkD4hIlGa0Q6OOpsHCcY",
+      client_secret: "vUaz0N4jS6dCCiA2l91EGw8aPlFLbobG",
+      // scope: "read",
+      // provision_key: "gGjiykLSCGGDWTPL6LodqYNEXk4egqiN",
       code: code
     }
     const url = this.baseUrl;

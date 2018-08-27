@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {BuscarNaveAeronaveService} from "./services/buscar-nave-aeronave.service";
+// import {BuscarNaveAeronaveService} from "./services/buscar-nave-aeronave.service";
 import {ComunicatorService} from "./services/comunicator.service";
 import {LogMessage} from "./entities/log-message";
 import {ActivatedRoute, NavigationEnd, Router, UrlSegment} from "@angular/router";
@@ -13,7 +13,7 @@ export class AppComponent implements OnInit{
   title = 'app';
   log:LogMessage[];
   operacionActual = "inicio";
-  constructor(private buscarNave: BuscarNaveAeronaveService, private logger: ComunicatorService,private route: ActivatedRoute,private router: Router){
+  constructor( private logger: ComunicatorService,private route: ActivatedRoute,private router: Router){
     this.log = [];
     console.log(this.operacionActual);
     logger.logMessage.subscribe(message=>{
