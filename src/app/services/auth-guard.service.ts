@@ -20,17 +20,17 @@ export class AuthGuardService implements CanActivate{
         localStorage.setItem("token",JSON.stringify({...res,fi}));
         // console.log(res.json())
         // localStorage.setItem("token",res.access_token);
+        window.location.reload();
         return true;
       },error =>{
         console.log("hay un error: ",error)
-        // window.location.href = this.loggin_url;
+        window.location.href = this.loggin_url;
         return false;
       }).catch(this.handleError);
     } else {
-      // window.location.href = this.loggin_url;
+      window.location.href = this.loggin_url;
     }
 
-    return false;
 
   }
 
