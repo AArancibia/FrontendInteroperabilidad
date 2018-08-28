@@ -5,7 +5,7 @@ import {AuthService} from "./auth.service";
 
 @Injectable()
 export class AuthGuardService implements CanActivate{
-  private loggin_url = "http://localhost:8080/autenticar/platpide";
+  private loggin_url = "http://app.munives.gob.pe/seguridad/logout/platpide";
   constructor(private authService: AuthService) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
