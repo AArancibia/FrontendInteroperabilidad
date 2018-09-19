@@ -5,7 +5,7 @@ import {AuthService} from "./auth.service";
 
 @Injectable()
 export class AuthGuardService implements CanActivate{
-  private loggin_url = "http://app.munives.gob.pe/seguridad/logout/platpide";
+    private loggin_url = "http://app.munives.gob.pe/seguridad/logout/platpide/";
   constructor(private authService: AuthService) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
@@ -24,11 +24,11 @@ export class AuthGuardService implements CanActivate{
         return true;
       },error =>{
         console.log("hay un error: ",error)
-        window.location.href = this.loggin_url;
+        window.location.href = this.loggin_url+this.authService.clientId;
         return false;
       }).catch(this.handleError);
     } else {
-      window.location.href = this.loggin_url;
+      window.location.href = this.loggin_url+this.authService.clientId;
     }
 
 
